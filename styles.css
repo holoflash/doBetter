@@ -1,0 +1,123 @@
+:root {
+    --mainBg: #1e222d;
+    --color1: #C188C1;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+    background-color: var(--mainBg);
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    color: aliceblue;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+hr {
+    margin: 1vh;
+}
+
+.header {
+    margin: 1vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 3vh;
+}
+
+.navigation {
+    height: fit-content;
+    font-size: 2vh;
+    cursor: pointer;
+    border: none;
+    color: var(--color1);
+    background-color: transparent;
+}
+
+.taskInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vh;
+}
+
+input {
+    font-size: 2vh;
+    width: 100%;
+    height: 20px;
+    border: none;
+    padding: 10px;
+}
+
+.addNewTask {
+    width: 10%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.doAndTitle {
+    font-size: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    text-align: center;
+}
+
+.doThing {
+    all: unset;
+    display: inline-block;
+    cursor: pointer;
+    color: var(--color1);
+}
+
+.listTitle {
+    margin: 0;
+    color: rgb(255, 255, 255);
+    white-space: nowrap;
+}
+
+.taskList {
+    margin: 1vh;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    text-indent: 0;
+    padding: 10px;
+    display: block;
+    font-size: 3vh;
+    margin: 1vh;
+}
+
+.completedTask {
+    text-decoration: line-through;
+    color: var(--color1);
+}
+
+.constantContent {
+    flex: 1;
+    margin: 1vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.variableContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), 90%, var(--color1));
+}
