@@ -1,6 +1,8 @@
 :root {
     --mainBg: #1e222d;
     --color1: #C188C1;
+    --color2: #87C0AF;
+    --color3: #BF9F86;
 }
 
 html,
@@ -22,10 +24,6 @@ a {
     text-decoration: inherit;
 }
 
-hr {
-    margin: 1vh;
-}
-
 .header {
     margin: 1vh;
     display: flex;
@@ -41,28 +39,6 @@ hr {
     border: none;
     color: var(--color1);
     background-color: transparent;
-}
-
-.taskInput {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1vh;
-}
-
-input {
-    font-size: 2vh;
-    width: 100%;
-    height: 20px;
-    border: none;
-    padding: 10px;
-}
-
-.addNewTask {
-    width: 10%;
-    height: 40px;
-    border: none;
-    cursor: pointer;
 }
 
 .doAndTitle {
@@ -115,9 +91,32 @@ li {
 }
 
 .variableContent {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    align-items: center;
+    width: 100vw;
     height: 100%;
-    background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), 90%, var(--color1));
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    overflow: scroll;
+    scroll-snap-type: x mandatory;
+}
+
+.page1,
+.page2,
+.page3 {
+    height: 100%;
+    scroll-snap-align: start;
+}
+
+.page1 {
+    background-image: linear-gradient(to bottom, var(--mainBg), 90%, var(--color1));
+}
+
+.page2 {
+    background-image: linear-gradient(to bottom, var(--mainBg), 90%, var(--color2));
+}
+
+.page3 {
+    background-image: linear-gradient(to bottom, var(--mainBg), 90%, var(--color3));
 }

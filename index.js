@@ -1,7 +1,7 @@
 class ToDo {
-    constructor(name, dueDate) {
+    constructor(name, status) {
         this.name = name;
-        this.dueDate = dueDate;
+        this.status = status;
     }
     markComplete() {
         this.status = true;
@@ -11,17 +11,17 @@ class ToDo {
         this.status = false;
     }
 
-    edit(newName, newDueDate, newStatus) {
+    edit(newName, newStatus) {
         this.name = newName;
-        this.dueDate = newDueDate;
         this.status = newStatus;
     }
 }
 
 class Project extends ToDo {
-    constructor(name, dueDate, status, content) {
-        super(name, dueDate, status);
+    constructor(name, status, content) {
+        super(name, status);
         this.content = content;
+        this.color = color;
     }
 
     addToDo(toDo) {
@@ -35,13 +35,13 @@ class TaskManager {
         this.myProjects = [];
     }
 
-    createNewToDo(name, dueDate) {
-        this.myInbox.push(new ToDo(name, dueDate));
+    createNewToDo(name, status) {
+        this.myInbox.push(new ToDo(name, status));
         // updateTheDOM(new ToDo(name, dueDate));
     }
 
-    createNewProject(name, dueDate) {
-        this.myProjects.push(new Project(name, dueDate));
+    createNewProject(name, status, color) {
+        this.myProjects.push(new Project(name, status, color));
     }
 
     addToDoToProject(inboxIndex, projectIndex) {
@@ -68,10 +68,10 @@ class TaskManager {
 }
 
 const taskManager = new TaskManager();
-taskManager.createNewToDo('Write report', 20220715);
-taskManager.createNewToDo('Write a book', 20220714);
-taskManager.createNewToDo('SING', 20220714);
-taskManager.myInbox[2].edit('play', 20110829, true);
+taskManager.createNewToDo('Write report', false);
+taskManager.createNewToDo('Write a book', false);
+taskManager.createNewToDo('SING', false);
+taskManager.myInbox[2].edit('play', true);
 
 taskManager.sortByDate(taskManager.myInbox);
 console.table(taskManager.myInbox);
