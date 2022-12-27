@@ -102,21 +102,7 @@ li {
     scroll-snap-type: x mandatory;
 }
 
-.page1,
-.page2,
-.page3 {
+.page {
     height: 100%;
     scroll-snap-align: start;
-}
-
-.page1 {
-    background-image: linear-gradient(to bottom, var(--mainBg), 90%, var(--color1));
-}
-
-.page2 {
-    background-image: linear-gradient(to bottom, var(--mainBg), 90%, var(--color2));
-}
-
-.page3 {
-    background-image: linear-gradient(to bottom, var(--mainBg), 90%, var(--color3));
 }

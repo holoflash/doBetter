@@ -1,3 +1,6 @@
+import { pageCreator, taskCreator } from "../scripts/list_DOM.js";
+
+
 class ToDo {
     constructor(name, status) {
         this.name = name;
@@ -17,9 +20,9 @@ class ToDo {
     }
 }
 
-class Project extends ToDo {
-    constructor(name, status, content) {
-        super(name, status);
+class Project {
+    constructor(name, content, color) {
+        this.name = name;
         this.content = content;
         this.color = color;
     }
@@ -29,19 +32,20 @@ class Project extends ToDo {
     }
 }
 
-class TaskManager {
+export class TaskManager {
     constructor() {
         this.myInbox = [];
         this.myProjects = [];
     }
 
-    createNewToDo(name, status) {
-        this.myInbox.push(new ToDo(name, status));
-        // updateTheDOM(new ToDo(name, dueDate));
+    createNewToDo(name) {
+        this.myInbox.push(new ToDo(name));
+        taskCreator(name)
     }
 
-    createNewProject(name, status, color) {
-        this.myProjects.push(new Project(name, status, color));
+    createNewProject(name, color) {
+        this.myProjects.push(new Project(name));
+        pageCreator(name, color)
     }
 
     addToDoToProject(inboxIndex, projectIndex) {
@@ -67,14 +71,12 @@ class TaskManager {
     }
 }
 
-const taskManager = new TaskManager();
-taskManager.createNewToDo('Write report', false);
-taskManager.createNewToDo('Write a book', false);
-taskManager.createNewToDo('SING', false);
-taskManager.myInbox[2].edit('play', true);
+// const taskManager = new TaskManager();
 
-taskManager.sortByDate(taskManager.myInbox);
-console.table(taskManager.myInbox);
+// taskManager.myInbox[2].edit('play', true);
+
+// taskManager.sortByDate(taskManager.myInbox);
+// console.table(taskManager.myInbox);
 
 // function updateTheDOM(task) {
 //     const content = document.querySelector('#content');
