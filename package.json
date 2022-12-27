@@ -4,7 +4,8 @@
   "description": "To-do list app",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "pushtopages": "git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",
