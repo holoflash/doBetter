@@ -1,82 +1,33 @@
-import { pageCreator, taskCreator } from "../scripts/list_DOM.js";
-
-
-class ToDo {
-    constructor(name, status) {
-        this.name = name;
-        this.status = status;
-    }
-    markComplete() {
-        this.status = true;
-    }
-
-    markIncomplete() {
-        this.status = false;
-    }
-
-    edit(newName, newStatus) {
-        this.name = newName;
-        this.status = newStatus;
-    }
-}
-
-class Project {
-    constructor(name, content, color) {
-        this.name = name;
-        this.content = content;
-        this.color = color;
-    }
-
-    addToDo(toDo) {
-        this.content.push(toDo);
-    }
-}
-
 export class TaskManager {
     constructor() {
-        this.myInbox = [];
-        this.myProjects = [];
+        this.myTaskLists = [];
     }
 
-    createNewToDo(name) {
-        this.myInbox.push(new ToDo(name));
-        taskCreator(name)
+    createNewTask(name, status, taskListName) {
+        const task = { name, status, taskListName };
+        console.table(this.myTaskLists)
+        this.myTaskLists.push(task)
     }
 
-    createNewProject(name, color) {
-        this.myProjects.push(new Project(name));
-        pageCreator(name, color)
+    createNewTaskList(name, color) {
+        this.myTaskLists.push({ name, color, tasks: [] });
     }
 
-    addToDoToProject(inboxIndex, projectIndex) {
-        this.myProjects[projectIndex].addToDo(this.myInbox[inboxIndex]);
-    }
-
-    sortByDate(array) {
-        array.sort((a, b) => a.dueDate - b.dueDate);
-    }
-
-    progression(array) {
-        const completed = array.filter((item) => item.status);
-        return ((completed.length / array.length) * 100).toFixed(0) + '%';
-    }
-    removeTask(array, taskIndex) {
-        array.splice(taskIndex, 1);
-    }
-    removeTaskFromProject(projectIndex, taskIndex) {
-        this.myProjects[projectIndex].content.splice(taskIndex, 1);
-    }
-    removeProject(projectIndex) {
-        this.myProjects.splice(projectIndex, 1);
+    calculateCompletionPercentage(tasks) {
+        const completed = tasks.filter(task => task.status);
+        return ((completed.length / tasks.length) * 100).toFixed(0) + '%';
     }
 }
+
+
+
 
 // const taskManager = new TaskManager();
 
-// taskManager.myInbox[2].edit('play', true);
+// taskManager.myTasks[2].edit('play', true);
 
-// taskManager.sortByDate(taskManager.myInbox);
-// console.table(taskManager.myInbox);
+// taskManager.sortByDate(taskManager.myTasks);
+// console.table(taskManager.myTasks);
 
 // function updateTheDOM(task) {
 //     const content = document.querySelector('#content');

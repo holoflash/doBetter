@@ -17,6 +17,7 @@ body {
     font-family: Helvetica, sans-serif;
     font-size: 16px;
     color: aliceblue;
+    user-select: none;
 }
 
 a {
@@ -66,6 +67,9 @@ a {
 .taskList {
     margin: 1vh;
     text-align: center;
+    width: 100vw;
+    word-wrap: break-word;
+    overflow: scroll;
 }
 
 li {
@@ -105,4 +109,28 @@ li {
 .page {
     height: 100%;
     scroll-snap-align: start;
+}
+
+.addTask {
+    text-align: center;
+    font-size: 3vh;
+    color: gray;
+    cursor: pointer;
+}
+
+.task-input {
+    text-align: center;
+    outline: none;
+    font-size: 3vh;
+    width: 90%;
+    word-wrap: break-word;
+    height: auto;
+    margin: auto;
+    margin-top: 1vh;
+    padding: 10px;
+}
+
+.placeholder {
+    text-align: center;
+    color: gray;
 }
