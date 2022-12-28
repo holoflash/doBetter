@@ -50,23 +50,26 @@ export const pageCreator = (name, color) => {
             }
         });
 
+
         const handleTaskInput = () => {
             const taskName = taskInput.textContent;
             if (taskName) {
                 const li = document.createElement('li');
+                li.classList.add('task')
                 li.textContent = taskName;
                 taskList.append(li);
+
+                li.addEventListener('dblclick', event => {
+                    event.target.remove();
+                });
+                li.addEventListener('click', event => {
+                    event.target.className = event.target.className === 'task' ? 'completedTask' : 'task';
+                });
             }
             taskInput.removeEventListener('focusout', handleTaskInput);
             taskInput.remove();
             placeholder.remove();
-
-            document.querySelectorAll('li').forEach(task => {
-                task.addEventListener('dblclick', event => {
-                    event.target.classList.toggle('completedTask');
-                })
-            })
-        };
+        }
 
         taskInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
@@ -74,7 +77,6 @@ export const pageCreator = (name, color) => {
                 handleTaskInput();
             }
         });
-
         taskInput.addEventListener('focusout', handleTaskInput);
     })
 }
