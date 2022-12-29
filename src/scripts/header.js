@@ -6,6 +6,7 @@ export function staticContentCreator() {
     const navbar = document.createElement('button');
     const logo = document.createElement('span');
     const variableContent = document.createElement('div');
+    const footer = document.createElement('div');
 
     constantContent.classList.add('constantContent');
     header.classList.add('header');
@@ -13,6 +14,7 @@ export function staticContentCreator() {
     navbar.classList.add('navigation');
     logo.classList.add('logo');
     variableContent.classList.add('variableContent');
+    footer.classList.add('footer');
 
     github.href = 'https://github.com/holoflash/doBetter';
     github.textContent = '/holoflash';
@@ -22,5 +24,5 @@ export function staticContentCreator() {
     header.append(github, navbar, logo);
     constantContent.append(header);
 
-    body.append(constantContent, variableContent);
+    body.append(constantContent, variableContent, footer);
 };
