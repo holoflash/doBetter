@@ -10,22 +10,6 @@ export const pageCreator = (name, color) => {
     const completedTaskList = document.createElement('div')
     const footer = document.querySelector('.footer');
     footer.textContent = '🗑'
-    // const navigation = document.createElement('div');
-    // navigation.classList.add(name);
-    // navigation.id = 'nav'
-    // navigation.innerText = '●';
-
-    // navigation.addEventListener('click', (event) => {
-    //     const navigators = document.querySelectorAll('#nav')
-    //     navigators.forEach(nav => nav.style.color = 'black')
-    //     event.target.style.color = 'white';
-    //     const pageToScrollTo = document.querySelector(`.${event.target.className}`);
-    //     pageToScrollTo.scrollIntoView();
-    //     console.log(pageToScrollTo.scrollIntoView())
-    // });
-
-    // footer.appendChild(navigation);
-
 
     page.classList.add('page');
     page.classList.add(name)
@@ -34,10 +18,6 @@ export const pageCreator = (name, color) => {
     listTitleSelector.classList.add('listTitle');
     taskList.classList.add('taskList');
     completedTaskList.classList.add('completedTaskList');
-
-
-
-
 
     colorSelector.textContent = 'do';
     colorAndTitle.appendChild(colorSelector);
@@ -48,16 +28,13 @@ export const pageCreator = (name, color) => {
 
     variableContent.appendChild(page);
 
-    page.style.backgroundImage = `linear-gradient(to bottom, var(--mainBg), 90%, var(--${color}))`;
+    page.style.backgroundImage = `linear-gradient(to bottom, var(--mainBg), 80%, var(--${color}))`;
     colorSelector.style.color = `var(--${color})`;
 
     const addTask = document.createElement('div');
     addTask.classList.add('addTask');
     addTask.textContent = '+';
     taskList.append(addTask);
-
-    //draging functions
-    // select the item element
 
     addTask.addEventListener('click', () => {
         const taskInput = document.createElement('div');
@@ -150,38 +127,3 @@ export const pageCreator = (name, color) => {
         taskInput.addEventListener('focusout', handleTaskInput);
     })
 }
-
-// page.addEventListener('click', () => {
-//     taskInput.readOnly = true;
-// })
-
-// const aTask = document.createElement('li');
-// aTask.classList.add('task');
-// aTask.textContent = name;
-// taskList.prepend(aTask);
-
-
-// export const taskCreator = () => {
-//     console.log('sup')
-//     const taskList = document.querySelector('.taskList');
-//     const aTask = document.createElement('li');
-//     aTask.classList.add('task');
-//     aTask.textContent = taskName;
-//     taskList.appendChild(aTask);
-//     aTask.addEventListener('click', () => {
-//         if (aTask.classList.contains('task')) {
-//             aTask.classList.remove('task');
-//             aTask.classList.add('completedTask');
-//         } else {
-//             aTask.classList.remove('completedTask');
-//             aTask.classList.add('task');
-//         }
-//     });
-// };
-
-
-// View all of the task lists and their tasks in the console
-
-
-
-

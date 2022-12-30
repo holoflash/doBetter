@@ -7,7 +7,8 @@
 
 html,
 body {
-    margin: 0;
+    width: 100vw;
+    margin: auto;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -19,8 +20,8 @@ body {
     color: aliceblue;
     -webkit-user-select: none;
     -ms-user-select: none;
-    touch-action: manipulation;
     user-select: none;
+    touch-action: manipulation;
 }
 
 a {
@@ -29,27 +30,20 @@ a {
 }
 
 .header {
-    margin: 1vh;
     display: flex;
+    height: fit-content;
     justify-content: space-between;
+    width: 98vw;
+    position: absolute;
+    top: 0;
     align-items: center;
     font-size: 3vh;
-    height: 5vh;
-}
-
-.navigation {
-    height: fit-content;
-    font-size: 2vh;
-    cursor: pointer;
-    border: none;
-    color: var(--color1);
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.112);
 }
 
 .doAndTitle {
+    margin-top: 2.5vh;
     font-size: 8vh;
-    display: flex;
-    justify-content: center;
     align-items: center;
     width: 100vw;
     text-align: center;
@@ -69,11 +63,13 @@ a {
 }
 
 .constantContent {
-    flex: 1;
-    margin: 1vh;
-    height: 100vh;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
 .variableContent {
@@ -88,17 +84,20 @@ a {
 }
 
 .page {
+    flex: auto;
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: 100vh;
     scroll-snap-align: center;
 }
 
 .taskList {
+    margin-top: 1vh;
     grid-column: 1 / 2;
 }
 
 .completedTaskList {
+    margin-top: 1vh;
     color: gray;
     grid-column: 2 / 3;
 }
