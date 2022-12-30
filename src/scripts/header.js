@@ -22,7 +22,7 @@ export function staticContentCreator() {
     logo.textContent = 'doBetter';
 
     header.append(github, navbar, logo);
-    constantContent.append(header);
+    constantContent.append(header, footer);
 
-    body.append(constantContent, variableContent, footer);
+    body.append(constantContent, variableContent);
 };
