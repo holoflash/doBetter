@@ -43,7 +43,7 @@ a {
 
 .doAndTitle {
     margin-top: 2.5vh;
-    font-size: 8vh;
+    font-size: 7vh;
     align-items: center;
     width: 100vw;
     text-align: center;
@@ -175,5 +175,5 @@ li {
 }
 
 .taskDrag {
-    display: none;
+    visibility: hidden;
 }

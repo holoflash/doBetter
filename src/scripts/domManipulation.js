@@ -111,6 +111,24 @@ export const pageCreator = (name, color) => {
                     footer.classList.remove('dragEnter');
                 });
 
+                //Reorder tasks by dragging and dropping
+                taskToDrag.forEach(task => task.addEventListener("dragover", event => {
+                    event.preventDefault();
+                }));
+
+                taskToDrag.forEach(task => task.addEventListener("drop", event => {
+                    event.preventDefault();
+                    if (dragged && dragged.classList.contains("task")) {
+                        const rect = event.target.getBoundingClientRect();
+                        const isOnTopHalf = event.clientY - rect.top < rect.height / 2;
+                        if (isOnTopHalf) {
+                            taskList.insertBefore(dragged, event.target);
+                        } else {
+                            event.target.insertAdjacentElement("afterend", dragged);
+                        }
+                    }
+                }));
+
                 taskInput.removeEventListener('focusout', handleTaskInput);
                 taskInput.remove();
                 placeholder.remove();
