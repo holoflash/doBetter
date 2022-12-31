@@ -1,17 +1,52 @@
 # doBetter
 
-<img
-  src="mockup.jpg"
-  alt="mockup">
+Live: https://holoflash.github.io/doBetter/
 
-doBetter is a task management application that aims to help you focus on the tasks at hand and increase your productivity. With a simple and intuitive interface, doBetter makes it easy to add new tasks to your current list using the text box located at the top of the window.
+This is a simple yet effective task management app that allows you to create new pages (task lists), add tasks to those pages, and mark tasks as completed. The app has a minimalistic design and is easy to use, making it perfect for those who want to stay organized without being overwhelmed by unnecessary features.
 
-doBetter comes with three default lists: "Today", "Tomorrow", and "Someday". These lists can be easily renamed to fit your specific needs by simply clicking on the title. If you no longer need a particular list, you can remove it by clicking and holding anywhere on the current window.
+## Features
 
-Easily access all of your lists through the dropdown menu located at the top of the window.
+-   Create new pages with a given name and color
+-   Add tasks to the page's task list
+-   Mark tasks as completed, which moves them to the completed task list
+-   Rearrange tasks in the task list and completed task list by dragging and dropping them
+-   Footer element with text content of '🗑'
+-   Page background color determined by the given color argument
 
-Alternatively, you can navigate between lists using the left and right swipe gestures or by clicking the dots at the bottom of the window.
+## Setup
 
-Simply click the "+" icon in the dropdown menu to create a new list. The "+" can also be reached by navigating to the last list and swiping left.
+1. Clone or download this repository
+2. Open the `index.html` file in your browser
 
-Customize the color of your current list to your preference by using the dropdown menu accessed by clicking on "do".
+## Usage
+
+To create a new page, use the `pageCreator` function and pass in the desired name and color for the page. The page will be appended to the DOM.
+
+```javascript
+pageCreator('My Page', 'red');
+```
+
+To add a new task to a page, click the '+' button on the page. A task input field will appear, where you can enter the task name. Press enter or click outside of the input field to add the task to the page's task list.
+
+To mark a task as completed, click on the task in the task list. It will be moved to the completed task list and the task's appearance will change.
+
+To rearrange tasks, click and hold on a task and drag it to the desired location. Release the mouse button to drop the task.
+
+## Built With
+
+-   ![HTML5](https://img.shields.io/static/v1?label=&message=HTML5&color=E34F26&logo=html5&logoColor=ffffff)
+-   ![CSS3](https://img.shields.io/static/v1?label=&message=CSS3&color=1572B6&logo=css3&logoColor=ffffff)
+-   ![JavaScript](https://img.shields.io/static/v1?label=&message=JavaScript&color=F7DF1E&logo=javascript&logoColor=000000)
+-   ![Webpack](https://img.shields.io/static/v1?label=&message=Webpack&color=8DD6F9&logo=webpack&logoColor=ffffff)
+
+## Learning Outcomes
+
+This project helped me to:
+
+-   Practice using vanilla JavaScript to manipulate the DOM
+-   Use webpack to bundle my code
+-   Understand the importance of user experience when designing an app
+
+One of the challenges I faced while working on this project was ensuring that the drag and drop functionality worked smoothly and intuitively for the user. Another challenge was ensuring that the app was fully responsive on both mobile and desktop devices.
+
+Overall, working on this project helped me to improve my skills in front-end web development.

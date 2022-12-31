@@ -66,10 +66,6 @@ export const pageCreator = (name, color) => {
                 li.textContent = taskName;
                 taskList.append(li);
 
-                li.addEventListener('dblclick', event => {
-                    event.target.remove();
-                });
-
                 li.addEventListener('click', event => {
                     if (taskList.contains(addTask)) {
                         event.target.className = event.target.className === 'task' ? 'completedTask' : 'task';

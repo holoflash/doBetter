@@ -16,7 +16,11 @@ export function staticContentCreator() {
 
     github.href = 'https://github.com/holoflash/doBetter';
     github.textContent = '/holoflash';
-    logo.textContent = 'doBetter';
+    logo.textContent = 'do';
+    const better = document.createElement('span');
+    better.textContent = 'Better';
+    better.style.color = 'moccasin';
+    logo.append(better);
 
     header.append(github, logo);
     constantContent.append(header, footer);

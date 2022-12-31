@@ -33,12 +33,16 @@ a {
     display: flex;
     height: fit-content;
     justify-content: space-between;
-    width: 98vw;
+    width: 100vw;
     position: absolute;
     top: 0;
     align-items: center;
     font-size: 3vh;
     background-color: rgba(0, 0, 0, 0.112);
+}
+
+.header>* {
+    margin: 0 1vh;
 }
 
 .doAndTitle {
