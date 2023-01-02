@@ -10,3 +10,4 @@ staticContentCreator();
 pageCreator('Today', 'color1');
 pageCreator('Tomorrow', 'color2');
 pageCreator('Someday', 'color3');
+

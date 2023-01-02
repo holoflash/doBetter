@@ -1,4 +1,5 @@
-import { TaskManager } from './functions.js';
+import { addToTaskList } from "./functions";
+import { dragAndDrop } from "./dragAndDropDesktop";
 
 export const pageCreator = (name, color) => {
     const variableContent = document.querySelector('.variableContent');
@@ -57,78 +58,47 @@ export const pageCreator = (name, color) => {
             placeholder.remove();
         });
 
+        const restore = () => {
+            taskInput.removeEventListener('focusout', handleTaskInput);
+            taskInput.remove();
+            placeholder.remove();
+            taskList.append(addTask);
+        }
+
         const handleTaskInput = () => {
-            const taskName = taskInput.textContent;
-            if (taskName !== 'New task' && taskName !== '') {
+            const taskName = taskInput.textContent.trim(' ');
+            if (taskName === 'New task' || taskName === '') {
+                restore();
+                return
+            } {
                 const li = document.createElement('li');
                 li.classList.add('task')
-                li.draggable = 'true;'
                 li.textContent = taskName;
                 taskList.append(li);
+                let taskNumber = taskList.childElementCount - 2;
+                li.id = taskNumber;
+                addToTaskList(li);
 
                 li.addEventListener('click', event => {
                     if (taskList.contains(addTask)) {
                         event.target.className = event.target.className === 'task' ? 'completedTask' : 'task';
                         if (event.target.parentNode === completedTaskList) {
                             taskList.insertBefore(event.target, addTask)
+                            event.target.style.color = 'white'
                         } else {
                             completedTaskList.append(event.target);
                             event.target.className = 'completedTask'
+                            event.target.style.color = `var(--${color})`
                         }
                     }
                 });
-
                 const taskToDrag = document.querySelectorAll('li');
-                let dragged;
-                taskToDrag.forEach(task => task.addEventListener('dragstart', (event) => {
-                    dragged = event.target;
-                    event.target.style.opacity = 0.1;
-                    setTimeout(() => {
-                        event.target.classList.add('taskDrag')
-                    }, 0);
-                }));
 
-                taskToDrag.forEach(task => task.addEventListener('dragend', (event) => {
-                    event.target.style.opacity = 1;
-                    event.target.classList.remove('taskDrag')
-                }));
-
-                footer.addEventListener("dragover", (event) => {
-                    event.preventDefault();
-                    footer.classList.add('dragEnter');
-                    footer.addEventListener("drop", (event) => {
-                        event.preventDefault();
-                        dragged.remove();
-                        footer.classList.remove('dragEnter');
-                    });
-                },);
-
-                footer.addEventListener("dragleave", () => {
-                    footer.classList.remove('dragEnter');
-                });
-
-                //Reorder tasks by dragging and dropping
-                taskToDrag.forEach(task => task.addEventListener("dragover", event => {
-                    event.preventDefault();
-                }));
-
-                taskToDrag.forEach(task => task.addEventListener("drop", event => {
-                    event.preventDefault();
-                    if (dragged && dragged.classList.contains("task")) {
-                        const rect = event.target.getBoundingClientRect();
-                        const isOnTopHalf = event.clientY - rect.top < rect.height / 2;
-                        if (isOnTopHalf) {
-                            taskList.insertBefore(dragged, event.target);
-                        } else {
-                            event.target.insertAdjacentElement("afterend", dragged);
-                        }
-                    }
-                }));
-
-                taskInput.removeEventListener('focusout', handleTaskInput);
-                taskInput.remove();
-                placeholder.remove();
-                taskList.append(addTask);
+                //disable drag and drop on mobile devices
+                if (screen.width > 400) {
+                    dragAndDrop(taskToDrag, footer, taskList);
+                }
+                restore();
             }
         }
 
@@ -140,4 +110,5 @@ export const pageCreator = (name, color) => {
         });
         taskInput.addEventListener('focusout', handleTaskInput);
     })
+    console.log(screen)
 }

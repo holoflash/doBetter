@@ -126,11 +126,11 @@ li {
     margin: 0.5vh;
     word-wrap: break-word;
     width: 90%;
+    color: white;
 }
 
 .completedTask {
     text-decoration: line-through;
-    color: var(--color1);
 }
 
 .addTask {
