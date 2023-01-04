@@ -46,7 +46,7 @@ a {
 }
 
 .doAndTitle {
-    margin-top: 2.5vh;
+    margin-top: 3vh;
     font-size: 7vh;
     align-items: center;
     width: 100vw;
@@ -80,9 +80,8 @@ a {
     align-items: center;
     width: 100vw;
     display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-flow: column;
     overflow: scroll;
     scroll-snap-type: x mandatory;
 }
@@ -125,7 +124,8 @@ li {
     font-size: 3vh;
     margin: 0.5vh;
     word-wrap: break-word;
-    width: 90%;
+    width: fit-content;
+    max-width: 90%;
     color: white;
 }
 
@@ -165,12 +165,12 @@ li {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 8vh;
+    font-size: 10vh;
     position: absolute;
     bottom: 0;
     width: 100vw;
     opacity: 0;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 .dragEnter {
@@ -180,4 +180,21 @@ li {
 
 .taskDrag {
     visibility: hidden;
+}
+
+.addToCompletedTaskListButton {
+    all: unset;
+    padding: auto;
+    margin: 10px;
+    border-radius: 2px;
+    background-color: rgb(62, 163, 106);
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.dontTouch {
+    touch-action: none;
+    pointer-events: none;
 }

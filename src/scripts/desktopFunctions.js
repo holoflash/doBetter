@@ -1,5 +1,19 @@
-export const dragAndDrop = (taskToDrag, footer, taskList) => {
-    taskToDrag.forEach(li => li.setAttribute("draggable", true));
+export const desktopFunctions = (li, addTask, taskToDrag, footer, taskList, completedTaskList, color) => {
+    li.addEventListener('click', event => {
+        if (taskList.contains(addTask)) {
+            event.target.className = event.target.className === 'task' ? 'completedTask' : 'task';
+            if (event.target.parentNode === completedTaskList) {
+                taskList.insertBefore(event.target, addTask)
+                event.target.style.color = 'white'
+            } else {
+                completedTaskList.append(event.target);
+                event.target.className = 'completedTask'
+                event.target.style.color = `var(--${color})`
+            }
+        }
+    });
+
+    taskToDrag.forEach(task => task.setAttribute("draggable", true));
     let dragged;
     taskToDrag.forEach(task => task.addEventListener("dragstart", event => {
         dragged = event.target;
@@ -18,6 +32,7 @@ export const dragAndDrop = (taskToDrag, footer, taskList) => {
         event.preventDefault();
         footer.classList.add("dragEnter");
         footer.addEventListener("drop", event => {
+
             event.preventDefault();
             dragged.remove();
             footer.classList.remove("dragEnter");

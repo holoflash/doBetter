@@ -22,6 +22,14 @@ export function staticContentCreator() {
     better.style.color = 'moccasin';
     logo.append(better);
 
+    // const clear = document.createElement('button')
+    // clear.textContent = 'clear'
+    // clear.classList.add('clear');
+    // clear.addEventListener('click', () => {
+    //     alert("Local storage erased")
+    //     localStorage.clear();
+    // });
+
     header.append(github, logo);
     constantContent.append(header, footer);
 

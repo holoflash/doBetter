@@ -1,13 +1,10 @@
 import '../styles/styles.css'
 
-import { staticContentCreator } from "./header";
-import { pageCreator } from "./domManipulation";
+import { staticContentCreator } from "./staticContentCreator";
+import { variableContentCreator } from "./variableContentCreator";
 
-
-//Create header and area to attach new pages to
 staticContentCreator();
 
-pageCreator('Today', 'color1');
-pageCreator('Tomorrow', 'color2');
-pageCreator('Someday', 'color3');
-
+variableContentCreator('Today', 'color1');
+variableContentCreator('Tomorrow', 'color2');
+variableContentCreator('Someday', 'color3');
