@@ -1,7 +1,34 @@
 import { desktopFunctions } from "./desktopFunctions";
 import { mobileFunctions } from "./mobileFunctions";
 
+export const retrieveFromLocalStorage = (color) => {
+    const taskList = document.querySelector('.taskList')
+    let taskArray = localStorage.getItem("taskArray") ? Array.from(JSON.parse(localStorage.getItem("taskArray"))) : [];
+    taskArray.forEach((task) => {
+        if (!taskList.querySelector(`li[textContent="${task}"]`)) {
+            const li = document.createElement('li');
+            li.classList.add('task')
+            li.textContent = task
+            taskList.prepend(li);
+        }
+    });
+    const completedTaskList = document.querySelector('.completedTaskList')
+    let completedTaskArray = localStorage.getItem("completedTaskArray") ? Array.from(JSON.parse(localStorage.getItem("completedTaskArray"))) : [];
+    completedTaskArray.forEach((task) => {
+        if (!completedTaskList.querySelector(`li[textContent="${task}"]`)) {
+            const li = document.createElement('li');
+            li.classList.add('completedTask')
+            li.textContent = task
+            li.style.color = `var(--${color})`;
+            completedTaskList.prepend(li);
+        }
+    });
+}
+
 export const taskManager = (taskList, footer, addTask, completedTaskList, color) => {
+    let taskArray = localStorage.getItem("taskArray") ? Array.from(JSON.parse(localStorage.getItem("taskArray"))) : [];
+    let completedTaskArray = localStorage.getItem("completedTaskArray") ? Array.from(JSON.parse(localStorage.getItem("completedTaskArray"))) : [];
+
     const taskInput = document.createElement('div');
     taskInput.addEventListener('input', (event) => {
         if (event.inputType === 'insertFromPaste') {
@@ -31,25 +58,6 @@ export const taskManager = (taskList, footer, addTask, completedTaskList, color)
     }
 
     const handleTaskInput = () => {
-        // let taskArray = Array.from(JSON.parse(localStorage.getItem("taskArray")));
-        // let completedTaskArray = Array.from(JSON.parse(localStorage.getItem("completedTaskArray")));
-
-        // taskArray.forEach((task) => {
-        //     const li = document.createElement('li');
-        //     li.classList.add('task')
-        //     li.textContent = task
-        //     taskList.append(li);
-        // });
-
-        // completedTaskArray.forEach((task) => {
-        //     const li = document.createElement('li');
-        //     li.classList.add('completedTask')
-        //     li.textContent = task
-        //     completedTaskList.append(li);
-        //     li.className = 'completedTask'
-        //     li.style.color = `var(--${color})`
-        // })
-
         const taskName = taskInput.textContent.trim(' ');
         if (taskName === 'New task' || taskName === '') {
             restore();
@@ -59,8 +67,8 @@ export const taskManager = (taskList, footer, addTask, completedTaskList, color)
         li.classList.add('task')
         li.textContent = taskName;
         taskList.append(li);
-        // taskArray.push(li.textContent)
-        // localStorage.setItem("taskArray", JSON.stringify(taskArray));
+        taskArray.push(li.textContent);
+        localStorage.setItem("taskArray", JSON.stringify(taskArray));
 
         (function desktopOrMobile() {
             const taskToDrag = document.querySelectorAll('li');
@@ -71,10 +79,10 @@ export const taskManager = (taskList, footer, addTask, completedTaskList, color)
                     (navigator.msMaxTouchPoints > 0));
             }
             if (isTouchDevice() === false) {
-                desktopFunctions(li, addTask, taskToDrag, footer, taskList, completedTaskList, color);
+                desktopFunctions(li, addTask, taskToDrag, footer, taskList, completedTaskList, color, taskArray, completedTaskArray);
             }
             if (isTouchDevice() === true) {
-                mobileFunctions(li, addTask, footer, taskList, completedTaskList, color);
+                mobileFunctions(li, addTask, footer, taskList, completedTaskList, color, taskArray, completedTaskArray);
             }
         })();
         restore();
@@ -87,5 +95,3 @@ export const taskManager = (taskList, footer, addTask, completedTaskList, color)
     });
     taskInput.addEventListener('focusout', handleTaskInput);
 }
-
-
