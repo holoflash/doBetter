@@ -1,0 +1,21 @@
+{
+    "name": "doBetter",
+    "short_name": "doBetter",
+    "description": "To-do list app. Student project.",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "100x100",
+            "type": "image/png"
+        },
+        {
+            "src": "bigicon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "index.html",
+    "display": "standalone",
+    "theme_color": "#C188C1",
+    "background_color": "#1e222d"
+}
