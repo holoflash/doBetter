@@ -6,6 +6,8 @@ export function staticContentCreator() {
     const logo = document.createElement('span');
     const variableContent = document.createElement('div');
     const footer = document.createElement('div');
+    const better = document.createElement('span');
+    const indicatorHolder = document.createElement('div');
 
     constantContent.classList.add('constantContent');
     header.classList.add('header');
@@ -13,25 +15,22 @@ export function staticContentCreator() {
     logo.classList.add('logo');
     variableContent.classList.add('variableContent');
     footer.classList.add('footer');
+    footer.classList.add('hide');
+    indicatorHolder.classList.add('indicatorHolder')
 
-    github.href = 'https://github.com/holoflash/doBetter';
     github.textContent = '/holoflash';
     logo.textContent = 'do';
-    const better = document.createElement('span');
     better.textContent = 'Better';
     better.style.color = 'moccasin';
+    github.href = 'https://github.com/holoflash/doBetter#readme';
+
+    better.addEventListener('click', () => {
+        localStorage.clear();
+        location.reload();
+    })
+
     logo.append(better);
-
-    // const clear = document.createElement('button')
-    // clear.textContent = 'clear'
-    // clear.classList.add('clear');
-    // clear.addEventListener('click', () => {
-    //     alert("Local storage erased")
-    //     localStorage.clear();
-    // });
-
-    header.append(github, logo);
+    header.append(github, indicatorHolder, logo);
     constantContent.append(header, footer);
-
     body.append(constantContent, variableContent);
 };

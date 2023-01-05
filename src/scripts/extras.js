@@ -17,12 +17,6 @@
 
 
 
-
-//     //Create a "CLEAR" function
-//     //  localStorage.clear();
-// };
-
-
             // const elementToMove = event.target.textContent;
                 // const indexToMove = completedTaskArray.indexOf(elementToMove);
                 // if (indexToMove > -1) {

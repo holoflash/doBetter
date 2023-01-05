@@ -1,34 +1,7 @@
 import { desktopFunctions } from "./desktopFunctions";
 import { mobileFunctions } from "./mobileFunctions";
 
-export const retrieveFromLocalStorage = (color) => {
-    const taskList = document.querySelector('.taskList')
-    let taskArray = localStorage.getItem("taskArray") ? Array.from(JSON.parse(localStorage.getItem("taskArray"))) : [];
-    taskArray.forEach((task) => {
-        if (!taskList.querySelector(`li[textContent="${task}"]`)) {
-            const li = document.createElement('li');
-            li.classList.add('task')
-            li.textContent = task
-            taskList.prepend(li);
-        }
-    });
-    const completedTaskList = document.querySelector('.completedTaskList')
-    let completedTaskArray = localStorage.getItem("completedTaskArray") ? Array.from(JSON.parse(localStorage.getItem("completedTaskArray"))) : [];
-    completedTaskArray.forEach((task) => {
-        if (!completedTaskList.querySelector(`li[textContent="${task}"]`)) {
-            const li = document.createElement('li');
-            li.classList.add('completedTask')
-            li.textContent = task
-            li.style.color = `var(--${color})`;
-            completedTaskList.prepend(li);
-        }
-    });
-}
-
-export const taskManager = (taskList, footer, addTask, completedTaskList, color) => {
-    let taskArray = localStorage.getItem("taskArray") ? Array.from(JSON.parse(localStorage.getItem("taskArray"))) : [];
-    let completedTaskArray = localStorage.getItem("completedTaskArray") ? Array.from(JSON.parse(localStorage.getItem("completedTaskArray"))) : [];
-
+export const taskManager = (taskList, footer, addTask, completedTaskList, name) => {
     const taskInput = document.createElement('div');
     taskInput.addEventListener('input', (event) => {
         if (event.inputType === 'insertFromPaste') {
@@ -67,8 +40,8 @@ export const taskManager = (taskList, footer, addTask, completedTaskList, color)
         li.classList.add('task')
         li.textContent = taskName;
         taskList.append(li);
-        taskArray.push(li.textContent);
-        localStorage.setItem("taskArray", JSON.stringify(taskArray));
+
+
 
         (function desktopOrMobile() {
             const taskToDrag = document.querySelectorAll('li');
@@ -79,13 +52,20 @@ export const taskManager = (taskList, footer, addTask, completedTaskList, color)
                     (navigator.msMaxTouchPoints > 0));
             }
             if (isTouchDevice() === false) {
-                desktopFunctions(li, addTask, taskToDrag, footer, taskList, completedTaskList, color, taskArray, completedTaskArray);
+                desktopFunctions(li, addTask, taskToDrag, footer, taskList, completedTaskList);
             }
             if (isTouchDevice() === true) {
-                mobileFunctions(li, addTask, footer, taskList, completedTaskList, color, taskArray, completedTaskArray);
+                mobileFunctions(li, addTask, footer, taskList, completedTaskList);
             }
         })();
         restore();
+
+        //LocalStorage ops
+        const storedObject = JSON.parse(localStorage.getItem(name));
+        storedObject.taskArray.push(li.textContent);
+        localStorage.setItem(name, JSON.stringify(storedObject));
+        //end
+
     }
     taskInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {

@@ -46,7 +46,7 @@ a {
 }
 
 .doAndTitle {
-    margin-top: 3vh;
+    margin-top: 5vh;
     font-size: 7vh;
     align-items: center;
     width: 100vw;
@@ -56,7 +56,6 @@ a {
 .doThing {
     all: unset;
     display: inline-block;
-    cursor: pointer;
     color: var(--color1);
 }
 
@@ -131,6 +130,7 @@ li {
 
 .completedTask {
     text-decoration: line-through;
+    color: gray;
 }
 
 .addTask {
@@ -165,22 +165,16 @@ li {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 10vh;
+    font-size: 15vh;
+    text-shadow: #1e222d4a 1vh 1vh 1vh;
     position: absolute;
     bottom: 0;
+    padding-bottom: 5vh;
     width: 100vw;
     opacity: 0;
     transition: all 0.3s ease;
 }
 
-.dragEnter {
-    opacity: 1;
-    transition: all 1s ease;
-}
-
-.taskDrag {
-    visibility: hidden;
-}
 
 .addToCompletedTaskListButton {
     all: unset;
@@ -190,6 +184,11 @@ li {
     background-color: rgb(62, 163, 106);
 }
 
+.reveal {
+    opacity: 1;
+    transition: all 1s ease;
+}
+
 .hide {
     visibility: hidden;
 }
@@ -197,4 +196,23 @@ li {
 .dontTouch {
     touch-action: none;
     pointer-events: none;
+}
+
+.indicatorHolder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 0;
+}
+
+.pageIndicator {
+    font-size: 2vh;
+    margin-inline: 1vh;
+    padding: 0;
+}
+
+.glow {
+    font-size: 4vh;
 }
