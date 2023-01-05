@@ -30,7 +30,6 @@ export const desktopFunctions = (li, addTask, taskToDrag, footer, taskList, comp
         event.preventDefault();
         footer.classList.add("reveal");
         footer.addEventListener("drop", event => {
-
             event.preventDefault();
             dragged.remove();
             footer.classList.remove("reveal");

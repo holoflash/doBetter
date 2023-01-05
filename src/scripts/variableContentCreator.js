@@ -82,6 +82,7 @@ export const variableContentCreator = (name, color) => {
     }
     createObserver();
 
+
     // // LocalStorage ops
     // const taskArray = [].slice.call(taskList)
     // const completedTaskArray = [].slice.call(completedTaskList)
