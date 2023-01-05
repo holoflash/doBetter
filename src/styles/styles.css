@@ -143,6 +143,7 @@ li {
     font-style: normal;
     text-align: center;
     font-size: 3vh;
+    padding: 0;
     color: gray;
     cursor: pointer;
 }
@@ -155,7 +156,7 @@ li {
     word-wrap: break-word;
     height: auto;
     padding: 0;
-    margin: 0.5vh;
+    margin: 0;
 }
 
 .placeholder {
@@ -172,14 +173,16 @@ li {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 15vh;
-    text-shadow: #1e222d4a 1vh 1vh 1vh;
+    font-size: 10vh;
     position: absolute;
     bottom: 0;
-    padding-bottom: 5vh;
+    padding-bottom: 2vh;
+    padding-top: 2vh;
     width: 100vw;
     opacity: 0;
     transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.349);
+    text-decoration: overline;
 }
 
 
@@ -227,4 +230,10 @@ li {
     font-size: 4vh;
     transition: all 0.5s ease;
     opacity: 1;
+}
+
+.moveLeft {
+    transform: translate(-100vw);
+    transition: all 1s ease;
+    color: var(--color2)
 }

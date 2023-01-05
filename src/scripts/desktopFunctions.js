@@ -1,4 +1,4 @@
-export const desktopFunctions = (li, addTask, taskToDrag, footer, taskList, completedTaskList, taskArray, completedTaskArray) => {
+export const desktopFunctions = (li, addTask, taskToDrag, footer, taskList, completedTaskList) => {
     li.addEventListener('click', event => {
         if (taskList.contains(addTask)) {
             event.target.className = event.target.className === 'task' ? 'completedTask' : 'task';

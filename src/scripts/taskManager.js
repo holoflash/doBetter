@@ -55,16 +55,16 @@ export const taskManager = (taskList, footer, addTask, completedTaskList, name) 
                 desktopFunctions(li, addTask, taskToDrag, footer, taskList, completedTaskList);
             }
             if (isTouchDevice() === true) {
-                mobileFunctions(li, addTask, footer, taskList, completedTaskList);
+                mobileFunctions(li, addTask, taskList, completedTaskList);
             }
         })();
         restore();
 
-        //LocalStorage ops
-        const storedObject = JSON.parse(localStorage.getItem(name));
-        storedObject.taskArray.push(li.textContent);
-        localStorage.setItem(name, JSON.stringify(storedObject));
-        //end
+        // //LocalStorage ops
+        // const storedObject = JSON.parse(localStorage.getItem(name));
+        // storedObject.taskArray.push(li.textContent);
+        // localStorage.setItem(name, JSON.stringify(storedObject));
+        // //end
 
     }
     taskInput.addEventListener('keydown', (event) => {

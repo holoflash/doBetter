@@ -13,7 +13,7 @@ export const variableContentCreator = (name, color) => {
     const footer = document.querySelector('.footer');
     const addTask = document.createElement('div');
 
-    footer.textContent = '🗑'
+    footer.textContent = 'delete'
     doColor.textContent = 'do';
     title.textContent = name;
     addTask.textContent = '+';
