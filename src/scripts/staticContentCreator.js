@@ -5,7 +5,6 @@ export function staticContentCreator() {
     const github = document.createElement('a');
     const logo = document.createElement('span');
     const variableContent = document.createElement('div');
-    const footer = document.createElement('div');
     const better = document.createElement('span');
     const indicatorHolder = document.createElement('div');
 
@@ -14,8 +13,6 @@ export function staticContentCreator() {
     github.classList.add('github');
     logo.classList.add('logo');
     variableContent.classList.add('variableContent');
-    footer.classList.add('footer');
-    footer.classList.add('hide');
     indicatorHolder.classList.add('indicatorHolder')
 
     github.textContent = '/holoflash';
@@ -31,6 +28,6 @@ export function staticContentCreator() {
 
     logo.append(better);
     header.append(github, indicatorHolder, logo);
-    constantContent.append(header, footer);
+    constantContent.append(header);
     body.append(constantContent, variableContent);
 };

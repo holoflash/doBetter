@@ -10,24 +10,27 @@ export const variableContentCreator = (name, color) => {
     const title = document.createElement('span');
     const taskList = document.createElement('div');
     const completedTaskList = document.createElement('div')
-    const footer = document.querySelector('.footer');
     const addTask = document.createElement('div');
+    const percentageDisplay = document.createElement('div');
 
-    footer.textContent = 'delete'
     doColor.textContent = 'do';
     title.textContent = name;
     addTask.textContent = '+';
-    page.style.backgroundImage = `linear-gradient(to bottom, var(--mainBg), 80%, var(--${color}))`;
     doColor.style.color = `var(--${color})`;
-    pageIndicator.textContent = '●'
+    pageIndicator.innerText = '❖'
+    percentageDisplay.textContent = `100%`
+    percentageDisplay.style.color = `var(--${color})`;
+    doAndTitle.style.borderTop = `solid var(--${color}) 0.5vh`;
 
     page.classList.add('page');
     page.classList.add(name)
     doAndTitle.classList.add('doAndTitle');
-    doColor.classList.add('doThing');
+    doColor.classList.add('doColor');
     title.classList.add('listTitle');
     addTask.classList.add('addTask');
     taskList.classList.add('taskList');
+    percentageDisplay.classList.add(`${name}Percentage`)
+    percentageDisplay.classList.add('percentageDisplay')
     completedTaskList.classList.add('completedTaskList');
     pageIndicator.classList.add('pageIndicator')
     pageIndicator.id = name;
@@ -38,6 +41,7 @@ export const variableContentCreator = (name, color) => {
 
     doAndTitle.appendChild(doColor);
     doAndTitle.appendChild(title);
+    taskList.append(percentageDisplay)
     taskList.append(addTask);
     variableContent.appendChild(page);
     page.append(doAndTitle, taskList, completedTaskList);
@@ -74,13 +78,11 @@ export const variableContentCreator = (name, color) => {
                     document.querySelector('#Today').classList.remove('glow')
                     document.querySelector('#Tomorrow').classList.remove('glow')
                 }
-
-
-
             }
         }
     }
     createObserver();
+
 
 
     // // LocalStorage ops
@@ -98,6 +100,6 @@ export const variableContentCreator = (name, color) => {
     // // End
 
     addTask.addEventListener('click', () => {
-        taskManager(taskList, footer, addTask, completedTaskList, name);
+        taskManager(taskList, addTask, completedTaskList, name, color);
     });
 }
