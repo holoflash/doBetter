@@ -11,16 +11,13 @@ export const variableContentCreator = (name, color) => {
     const taskList = document.createElement('div');
     const completedTaskList = document.createElement('div')
     const addTask = document.createElement('div');
-    const percentageDisplay = document.createElement('div');
+    const progressBar = document.createElement('div');
 
     doColor.textContent = 'do';
     title.textContent = name;
     addTask.textContent = '+';
     doColor.style.color = `var(--${color})`;
     pageIndicator.innerText = '❖'
-    percentageDisplay.textContent = `100%`
-    percentageDisplay.style.color = `var(--${color})`;
-    doAndTitle.style.borderTop = `solid var(--${color}) 0.5vh`;
 
     page.classList.add('page');
     page.classList.add(name)
@@ -29,8 +26,8 @@ export const variableContentCreator = (name, color) => {
     title.classList.add('listTitle');
     addTask.classList.add('addTask');
     taskList.classList.add('taskList');
-    percentageDisplay.classList.add(`${name}Percentage`)
-    percentageDisplay.classList.add('percentageDisplay')
+    progressBar.classList.add(`${name}`)
+    progressBar.classList.add('progressBar')
     completedTaskList.classList.add('completedTaskList');
     pageIndicator.classList.add('pageIndicator')
     pageIndicator.id = name;
@@ -41,7 +38,8 @@ export const variableContentCreator = (name, color) => {
 
     doAndTitle.appendChild(doColor);
     doAndTitle.appendChild(title);
-    taskList.append(percentageDisplay)
+    page.insertAdjacentElement('afterbegin', progressBar)
+    // page.insertAdjacentElement('', progressBar)
     taskList.append(addTask);
     variableContent.appendChild(page);
     page.append(doAndTitle, taskList, completedTaskList);

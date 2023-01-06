@@ -51,15 +51,21 @@ a {
     margin: 1vh;
 }
 
+.progressBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: none;
+    width: 100vw;
+    margin-top: 7vh;
+    height: 2vh;
+    color: moccasin;
+    border-bottom: solid rgba(0, 0, 0, 0.251) 1px;
+}
+
 .doAndTitle {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin-top: 7vh;
     font-size: 6.5vh;
-    width: 100vw;
-    background-color: var(--mainBg);
 }
 
 .doColor {
@@ -111,7 +117,6 @@ a {
 }
 
 .completedTaskList {
-    color: moccasin;
     grid-column: 2 / 3;
     padding-bottom: 1vh;
 }
@@ -142,6 +147,7 @@ li {
 
 .completedTask {
     text-decoration: line-through;
+    text-decoration-thickness: 1px;
     color: rgba(255, 228, 181, 0.385);
     font-size: min(2.8vh, 30px);
 }
@@ -206,7 +212,7 @@ li {
 
 .pageIndicator {
     font-size: max(2vh, 5px);
-    margin-inline: 2vh;
+    margin-inline: 1vh;
     padding: 0;
     transition: all 0.5s ease;
     opacity: 0.5;
@@ -218,7 +224,7 @@ li {
     font-size: max(3vh, 10px);
     transition: all 0.5s ease;
     opacity: 1;
-    width: 5vh;
+
     display: inline-block;
 }
 

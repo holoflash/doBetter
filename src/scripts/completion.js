@@ -1,4 +1,5 @@
 export const completion = (taskList, completedTaskList, color, name) => {
+    const progressBar = document.querySelector(`.${name}.progressBar`)
     let numberOfTasks = 0;
     let percentage = 0;
 
@@ -19,15 +20,12 @@ export const completion = (taskList, completedTaskList, color, name) => {
     }
     if (numberOfTasks === 0 && numberOfCompletedTasks > 0) {
         percentage = 100
+        progressBar.textContent = 'All done!'
     }
     if (!numberOfTasks && !numberOfCompletedTasks) {
         percentage = 100
     }
 
-    const percentageDisplay = document.querySelector((`.${name}Percentage`))
-
-    percentageDisplay.textContent = `${percentage}%`;
-    percentage = 50 - percentage;
-    // const progressBar = document.querySelector(`.${name}Progress`)
-    // progressBar.style.backgroundImage = `linear-gradient(to top, var(--${color}), ${percentage}%, var(--mainBg))`;
+    progressBar.textContent = `${percentage}% complete`
+    progressBar.style.backgroundImage = `linear-gradient(to right, var(--${color}), ${percentage}%, var(--mainBg))`;
 }

@@ -20,6 +20,7 @@ export const mobileFunctions = (li, addTask, taskList, completedTaskList, color,
     let touchendX = 0;
 
     li.addEventListener('touchstart', (event) => {
+        event.target.draggable = true;
         variableContent.classList.add('dontTouch')
         touchstartX = event.changedTouches[0].screenX;
         addTask.classList.add('dontTouch');
