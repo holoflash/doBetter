@@ -1,6 +1,5 @@
 import { completion } from "./completion";
 
-
 export const mobileFunctions = (li, addTask, taskList, completedTaskList, color, name) => {
     li.addEventListener('click', event => {
         if (taskList.contains(addTask)) {

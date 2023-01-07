@@ -1,8 +1,11 @@
 :root {
     --mainBg: #1e222d;
     --color1: #C188C1;
-    --color2: #87C0AF;
+    --color2: #87b2c0;
     --color3: #BF9F86;
+    --color4: #78c18e;
+    --color5: #c0bc87;
+    --color6: #bf8686;
 }
 
 * {
@@ -59,7 +62,7 @@ a {
     width: 100vw;
     margin-top: 7vh;
     height: 2vh;
-    color: moccasin;
+    color: rgba(255, 255, 255, 0.342);
     border-bottom: solid rgba(0, 0, 0, 0.251) 1px;
 }
 
@@ -200,31 +203,25 @@ li {
 }
 
 .indicatorHolder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 1fr;
     padding: 0;
     height: 3vh;
-    overflow-x: scroll;
-    overflow-y: hidden;
     white-space: nowrap;
 }
 
 .pageIndicator {
-    font-size: max(2vh, 5px);
-    margin-inline: 1vh;
     padding: 0;
     transition: all 0.5s ease;
-    opacity: 0.5;
-    width: 3vh;
+    opacity: 0.1;
     display: inline-block;
 }
 
 .glow {
-    font-size: max(3vh, 10px);
+
     transition: all 0.5s ease;
     opacity: 1;
-
     display: inline-block;
 }
 

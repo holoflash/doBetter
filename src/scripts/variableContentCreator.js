@@ -1,4 +1,7 @@
 import { taskManager } from "./taskManager";
+import { scrollAndNavigate } from "./scrollAndNavigate";
+import { pageView } from './pageView';
+import { completion } from "./completion";
 
 export const variableContentCreator = (name, color) => {
     const variableContent = document.querySelector('.variableContent');
@@ -12,7 +15,7 @@ export const variableContentCreator = (name, color) => {
     const completedTaskList = document.createElement('div')
     const addTask = document.createElement('div');
     const progressBar = document.createElement('div');
-
+    const logo = document.querySelector('.logo')
     doColor.textContent = 'do';
     title.textContent = name;
     addTask.textContent = '+';
@@ -39,65 +42,36 @@ export const variableContentCreator = (name, color) => {
     doAndTitle.appendChild(doColor);
     doAndTitle.appendChild(title);
     page.insertAdjacentElement('afterbegin', progressBar)
-    // page.insertAdjacentElement('', progressBar)
     taskList.append(addTask);
     variableContent.appendChild(page);
     page.append(doAndTitle, taskList, completedTaskList);
-
     indicatorHolder.append(pageIndicator);
 
-    //Determine the page in view and advise
-    function createObserver() {
-        let options = {
-            root: null,
-            rootMargin: "0px",
-            threshold: 0.5
-        };
-        let observer = new IntersectionObserver(handleIntersect, options);
-        observer.observe(page);
-    }
+    completion(taskList, completedTaskList, color, name)
+    pageView(variableContent, indicatorHolder, doAndTitle, page)
+    scrollAndNavigate(page);
 
-    function handleIntersect(entries) {
-        for (const entry of entries) {
-            if (entry.isIntersecting) {
-                let pageInView = entry.target.classList[1];
-                let correspondingDot = document.querySelector(`#${pageInView}`);
-                correspondingDot.classList.add('glow')
-
-                if (pageInView === 'Today') {
-                    document.querySelector('#Tomorrow').classList.remove('glow')
-                    document.querySelector('#Someday').classList.remove('glow')
-                }
-                if (pageInView === 'Tomorrow') {
-                    document.querySelector('#Today').classList.remove('glow')
-                    document.querySelector('#Someday').classList.remove('glow')
-                }
-                if (pageInView === 'Someday') {
-                    document.querySelector('#Today').classList.remove('glow')
-                    document.querySelector('#Tomorrow').classList.remove('glow')
-                }
-            }
-        }
-    }
-    createObserver();
-
-
-
-    // // LocalStorage ops
-    // const taskArray = [].slice.call(taskList)
-    // const completedTaskArray = [].slice.call(completedTaskList)
-
-    // const pageArray = {
-    //     taskArray,
-    //     completedTaskArray
-    // };
-    // localStorage.setItem(name, JSON.stringify(pageArray));
-
-    // storedObject = { taskArray, completedTaskArray }
-    // localStorage.setItem(name, JSON.stringify(storedObject));
-    // // End
+    logo.addEventListener('click', () => {
+        if (document.querySelector('.pageView')) return;
+        const addPage = document.querySelector('.addPage')
+        addPage.style.display = 'block'
+        pageView(variableContent, indicatorHolder, doAndTitle, page);
+    });
 
     addTask.addEventListener('click', () => {
         taskManager(taskList, addTask, completedTaskList, name, color);
     });
 }
+// // LocalStorage ops
+// const taskArray = [].slice.call(taskList)
+// const completedTaskArray = [].slice.call(completedTaskList)
+
+// const pageArray = {
+//     taskArray,
+//     completedTaskArray
+// };
+// localStorage.setItem(name, JSON.stringify(pageArray));
+
+// storedObject = { taskArray, completedTaskArray }
+// localStorage.setItem(name, JSON.stringify(storedObject));
+// // End

@@ -1,0 +1,98 @@
+.pageView {
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+.pageView .variableContent {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.pageView .page {
+    border: solid moccasin 1px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: auto;
+    padding: 1vh;
+    margin: 1vh;
+}
+
+.pageView .progressBar {
+    background-image: none;
+    height: fit-content;
+    width: 100%;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+}
+
+.pageView .taskList {
+    display: none;
+}
+
+.pageView .completedTaskList {
+    display: none;
+}
+
+.pageView .indicatorHolder {
+    display: none;
+}
+
+.addPage {
+    all: unset;
+    align-self: center;
+    color: white;
+    font-size: 5vh;
+}
+
+.addPage:hover {
+    color: moccasin;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+input {
+    all: unset;
+    align-self: center;
+}
+
+.color-checkbox {
+    display: none;
+}
+
+.color-button {
+    all: unset;
+    display: inline;
+    width: 2vh;
+    height: 2vh;
+    margin: 1vh;
+    border-radius: 50%;
+}
+
+.color1 {
+    background-color: var(--color1);
+}
+
+.color2 {
+    background-color: var(--color2);
+}
+
+.color3 {
+    background-color: var(--color3);
+}
+
+.color-checkbox:checked+.color-label {
+    border-color: #fff;
+}
