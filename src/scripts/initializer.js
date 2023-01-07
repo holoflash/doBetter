@@ -22,14 +22,6 @@ export const initializer = () => {
         inputName.classList.add('addPageInput');
         form.appendChild(inputName);
 
-        inputName.addEventListener('blur', event => {
-            event.preventDefault();
-            if (event.target !== form) {
-                form.remove();
-                variableContent.append(addPage);
-            }
-        });
-
         ['color1', 'color2', 'color3', 'color4', 'color5', 'color6'].forEach(color => {
             const button = document.createElement('button');
             button.type = 'button';
