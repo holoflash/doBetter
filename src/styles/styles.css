@@ -153,7 +153,6 @@ li {
     text-decoration: line-through;
     text-decoration-thickness: 1px;
     color: rgba(255, 228, 181, 0.385);
-    font-size: min(2.8vh, 30px);
 }
 
 .addTask {
@@ -227,11 +226,7 @@ li {
 }
 
 .moveLeft {
-    transform: translate(-100vw);
+    transform: translateX(-100vw);
     transition: all 1s ease;
     color: var(--color2)
-}
-
-#inputError {
-    color: red;
 }

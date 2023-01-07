@@ -11,23 +11,17 @@ export const completion = (taskList, completedTaskList, color, name) => {
 
     let numberOfCompletedTasks = 0;
     completedTaskList.childNodes.forEach(task => {
-        if (task.className === "completedTask") {
+        if (task.className === 'completedTask') {
             numberOfCompletedTasks++;
         }
     });
-    if (numberOfTasks > 0 && numberOfCompletedTasks > 0) {
+
+    if (!numberOfTasks && !numberOfCompletedTasks) {
+        percentage = 100;
+    } else {
         percentage = (((numberOfCompletedTasks / (numberOfTasks + numberOfCompletedTasks)) * 100)).toFixed(0);
     }
-    if (numberOfTasks === 0 && numberOfCompletedTasks > 0) {
-        percentage = 100
-        progressBar.textContent = 'All done!'
-    }
-    if (!numberOfTasks && !numberOfCompletedTasks) {
-        percentage = 100
-    }
-
     //Display the percentage value on the progressbar
-    progressBar.textContent = ' '
-
+    // progressBar.textContent = `${percentage}%`
     progressBar.style.backgroundImage = `linear-gradient(to right, var(--${color}), ${percentage}%, var(--mainBg))`;
 }

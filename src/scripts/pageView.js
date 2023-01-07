@@ -28,4 +28,3 @@ export const pageView = (variableContent, indicatorHolder, page) => {
 
     });
 }
-

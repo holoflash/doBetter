@@ -7,7 +7,9 @@ export function staticContentCreator() {
     const variableContent = document.createElement('div');
     const better = document.createElement('span');
     const indicatorHolder = document.createElement('div');
-    const pageView = document.createElement('div')
+    const pageView = document.createElement('div');
+    pageView.classList.add('pageView');
+
 
     constantContent.classList.add('constantContent');
     header.classList.add('header');
@@ -15,7 +17,6 @@ export function staticContentCreator() {
     logo.classList.add('logo');
     variableContent.classList.add('variableContent');
     indicatorHolder.classList.add('indicatorHolder')
-    pageView.classList.add('pageView');
 
     github.textContent = '/holoflash';
     logo.textContent = 'do';

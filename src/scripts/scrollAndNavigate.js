@@ -23,5 +23,5 @@ export const scrollAndNavigate = (page) => {
             }
         }
     };
-    createObserver()
+    createObserver();
 }

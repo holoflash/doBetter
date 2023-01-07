@@ -27,7 +27,6 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
     taskList.append(taskInput);
     taskInput.focus();
     addTask.remove();
-
     taskList.prepend(placeholder)
     taskInput.addEventListener('keydown', () => {
         placeholder.remove();
@@ -46,13 +45,11 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
             restore();
             return;
         }
-
         const li = document.createElement('li');
         li.classList.add('task');
         li.textContent = taskName;
         taskList.append(li);
         completion(taskList, completedTaskList, color, name);
-
         if (('ontouchstart' in window) ||
             (navigator.maxTouchPoints > 0) ||
             (navigator.msMaxTouchPoints > 0)) {
@@ -60,17 +57,14 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
         } else {
             desktopFunctions(li, addTask, taskList, completedTaskList, color, name);
         }
-
         restore();
     };
-
     taskInput.addEventListener('keydown', event => {
         if (event.key === 'Enter') {
             event.preventDefault();
             handleTaskInput();
         }
     });
-
     taskInput.addEventListener('focusout', handleTaskInput);
 };
 

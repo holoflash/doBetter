@@ -4,6 +4,7 @@ import { pageView } from './pageView';
 import { completion } from "./completion";
 
 export const variableContentCreator = (name, color) => {
+    name = (name.trim().replace(/\s/g, '_'));
     const variableContent = document.querySelector('.variableContent');
     const pageIndicator = document.createElement('span')
     const indicatorHolder = document.querySelector('.indicatorHolder');
@@ -29,39 +30,45 @@ export const variableContentCreator = (name, color) => {
     title.classList.add('listTitle');
     addTask.classList.add('addTask');
     taskList.classList.add('taskList');
-    progressBar.classList.add(`${name}`)
+    progressBar.classList.add(name);
     progressBar.classList.add('progressBar')
     completedTaskList.classList.add('completedTaskList');
     pageIndicator.classList.add('pageIndicator')
     pageIndicator.id = name;
     pageIndicator.style.color = `var(--${color})`;
+
     pageIndicator.addEventListener('click', (event) => {
         (document.querySelector(`.${event.target.id}`)).scrollIntoView()
     })
 
     doAndTitle.appendChild(doColor);
     doAndTitle.appendChild(title);
-    page.insertAdjacentElement('afterbegin', progressBar)
+    page.insertAdjacentElement('afterbegin', progressBar);
     taskList.append(addTask);
     variableContent.prepend(page);
     page.append(doAndTitle, taskList, completedTaskList);
     indicatorHolder.prepend(pageIndicator);
 
-    completion(taskList, completedTaskList, color, name)
-    pageView(variableContent, indicatorHolder, doAndTitle, page)
+    completion(taskList, completedTaskList, color, name);
+    pageView(variableContent, indicatorHolder, doAndTitle, page);
     scrollAndNavigate(page);
 
     logo.addEventListener('click', () => {
-        if (document.querySelector('.pageView')) return;
-        const addPage = document.querySelector('.addPage')
-        addPage.style.display = 'block'
-        pageView(variableContent, indicatorHolder, doAndTitle, page);
+        const pageViewElement = document.querySelector('.pageView');
+        if (pageViewElement && pageViewElement.hasChildNodes()) {
+            return
+        } else {
+            const addPage = document.querySelector('.addPage');
+            addPage.style.display = 'block';
+            pageView(variableContent, indicatorHolder, page);
+        }
     });
 
     addTask.addEventListener('click', () => {
         taskManager(taskList, addTask, completedTaskList, name, color);
     });
 }
+
 // // LocalStorage ops
 // const taskArray = [].slice.call(taskList)
 // const completedTaskArray = [].slice.call(completedTaskList)

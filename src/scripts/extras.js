@@ -1,22 +1,3 @@
-// export function changeTaskPosition(dragged, event) {
-//     let temp = dragged;
-//     dragged = event;
-//     event = temp;
-// }
-
-// export const TaskManager = (taskName, taskList) => {
-
-// }
-
-
-
-//     calculateCompletionPercentage(tasks) {
-//         const completed = tasks.filter(task => task.status);
-//         return ((completed.length / tasks.length) * 100).toFixed(0) + '%';
-//     }
-
-
-
             // const elementToMove = event.target.textContent;
                 // const indexToMove = completedTaskArray.indexOf(elementToMove);
                 // if (indexToMove > -1) {

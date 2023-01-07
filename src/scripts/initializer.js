@@ -1,10 +1,14 @@
 import { variableContentCreator } from "./variableContentCreator";
 
 export const initializer = () => {
+    const pageView = document.createElement('div');
+    pageView.classList.add('pageView');
+    document.body.append(pageView);
+
     variableContentCreator('Someday', 'color6');
-    variableContentCreator('This_year', 'color5');
-    variableContentCreator('This_month', 'color4');
-    variableContentCreator('This_week', 'color3');
+    variableContentCreator('This year', 'color5');
+    variableContentCreator('This month', 'color4');
+    variableContentCreator('This week', 'color3');
     variableContentCreator('Tomorrow', 'color2');
     variableContentCreator('Today', 'color1');
 
@@ -16,16 +20,22 @@ export const initializer = () => {
     variableContent.prepend(addPage);
     let sameNameCount = 0;
     addPage.addEventListener('click', () => {
+        const page = document.querySelectorAll('.page');
+        page.forEach(pages => pages.classList.add('dontTouch'));
         document.body.addEventListener('click', (event) => {
-            if (!['text', 'submit', 'button'].includes(event.target.type)) {
+            if (event.target.className === 'listTitle') {
                 form.remove();
                 variableContent.prepend(addPage);
                 return
             }
+            if (!['text', 'submit', 'button'].includes(event.target.type)) {
+                return
+            }
         })
-        const form = document.createElement('form');
+
+        const form = document.createElement('div');
+        form.classList.add('form')
         const inputName = document.createElement('input');
-        inputName.autofocus = true;
 
         form.scrollIntoView({
             behavior: 'smooth',
@@ -36,6 +46,7 @@ export const initializer = () => {
         inputName.maxLength = 12;
         inputName.placeholder = 'do:';
         inputName.classList.add('addPageInput');
+        inputName.autofocus = true;
         form.appendChild(inputName);
 
         ['color1', 'color2', 'color3', 'color4', 'color5', 'color6'].forEach(color => {
@@ -45,12 +56,12 @@ export const initializer = () => {
             button.style.backgroundColor = `var(--${color})`;
             button.classList.add('color-button');
             form.appendChild(button);
-            button.addEventListener('click', (event) => {
-                let name = inputName.value.trim().replace(/[^\w\s]/gi, '').replace(/\s/g, '_');
-                if (name === '') {
-                    name = 'Untitled'
-                }
 
+            button.addEventListener('click', (event) => {
+                let name = inputName.value.trim().replace(/[^\w\s]/gi, '').replace(/\s/g, '');
+                if (name === '') {
+                    name = 'Untitled';
+                }
                 if (document.querySelector(`.${name}`)) {
                     sameNameCount++
                     name = name + sameNameCount;
@@ -58,7 +69,9 @@ export const initializer = () => {
                 const color = event.target.id;
                 variableContentCreator(name, color);
                 form.remove();
+                addPage.remove();
                 variableContent.prepend(addPage);
+                page.forEach(pages => pages.classList.remove('dontTouch'));
             });
             addPage.remove();
         });
