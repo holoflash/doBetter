@@ -8,12 +8,14 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    width: auto;
+    max-width: 50vh;
+    margin: auto;
+    margin-bottom: 2vh;
 }
 
 .pageView .page {
-    border: solid moccasin 1px;
+    border: 1px solid moccasin;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -29,24 +31,21 @@
     height: fit-content;
     width: 100%;
     border-radius: 5px;
+    height: 0.5vh;
+    margin: 0.5vh;
     padding: 0;
-    margin: 0;
 }
 
-.pageView .taskList {
-    display: none;
-}
-
-.pageView .completedTaskList {
-    display: none;
-}
-
+.pageView .taskList,
+.pageView .completedTaskList,
 .pageView .indicatorHolder {
     display: none;
 }
 
 .addPage {
     all: unset;
+    display: flex;
+    justify-content: center;
     align-self: center;
     color: white;
     font-size: 5vh;
@@ -57,15 +56,24 @@
 }
 
 form {
+    align-self: center;
     display: flex;
     justify-content: center;
     flex-direction: row;
     align-items: center;
+    border-radius: 5px;
+    max-width: 50vh;
 }
 
 input {
     all: unset;
-    align-self: center;
+    background-color: rgba(0, 0, 0, 0.112);
+    width: 13ch;
+    padding: 1ch;
+    margin: 1vh;
+    border-radius: 5px;
+    font-size: 2vh;
+    max-width: 25vh;
 }
 
 .color-checkbox {
@@ -74,23 +82,11 @@ input {
 
 .color-button {
     all: unset;
-    display: inline;
-    width: 2vh;
-    height: 2vh;
+    display: inline-block;
+    width: 3vh;
+    height: 3vh;
     margin: 1vh;
     border-radius: 50%;
-}
-
-.color1 {
-    background-color: var(--color1);
-}
-
-.color2 {
-    background-color: var(--color2);
-}
-
-.color3 {
-    background-color: var(--color3);
 }
 
 .color-checkbox:checked+.color-label {

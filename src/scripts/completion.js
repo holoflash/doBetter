@@ -26,6 +26,8 @@ export const completion = (taskList, completedTaskList, color, name) => {
         percentage = 100
     }
 
-    progressBar.textContent = `${percentage}%`
+    //Display the percentage value on the progressbar
+    progressBar.textContent = ' '
+
     progressBar.style.backgroundImage = `linear-gradient(to right, var(--${color}), ${percentage}%, var(--mainBg))`;
 }

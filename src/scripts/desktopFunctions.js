@@ -1,29 +1,6 @@
 import { completion } from "./completion";
 
 export const desktopFunctions = (li, addTask, taskList, completedTaskList, color, name) => {
-    let mousedownX = 0;
-    let mouseupX = 0;
-
-    li.addEventListener('mousedown', (event) => {
-        mousedownX = event.screenX;
-    });
-
-    li.addEventListener('mouseup', (event) => {
-        mouseupX = event.screenX;
-        swipe(event);
-        event.stopPropagation();
-    });
-
-    const swipe = (event) => {
-        // Swipe left
-        if (mouseupX < mousedownX) {
-            event.target.classList.add('moveLeft');
-            setTimeout(() => {
-                event.target.remove();
-            }, 500);
-        }
-    }
-
     li.addEventListener('click', event => {
         if (taskList.contains(addTask)) {
             event.target.className = event.target.className === 'task' ? 'completedTask' : 'task';

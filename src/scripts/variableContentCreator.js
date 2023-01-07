@@ -17,7 +17,7 @@ export const variableContentCreator = (name, color) => {
     const progressBar = document.createElement('div');
     const logo = document.querySelector('.logo')
     doColor.textContent = 'do';
-    title.textContent = name;
+    title.textContent = name.trim().replace(/_/g, ' ');
     addTask.textContent = '+';
     doColor.style.color = `var(--${color})`;
     pageIndicator.innerText = '❖'
@@ -43,9 +43,9 @@ export const variableContentCreator = (name, color) => {
     doAndTitle.appendChild(title);
     page.insertAdjacentElement('afterbegin', progressBar)
     taskList.append(addTask);
-    variableContent.appendChild(page);
+    variableContent.prepend(page);
     page.append(doAndTitle, taskList, completedTaskList);
-    indicatorHolder.append(pageIndicator);
+    indicatorHolder.prepend(pageIndicator);
 
     completion(taskList, completedTaskList, color, name)
     pageView(variableContent, indicatorHolder, doAndTitle, page)

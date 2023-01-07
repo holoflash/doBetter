@@ -1,24 +1,40 @@
 import { variableContentCreator } from "./variableContentCreator";
 
 export const initializer = () => {
-    variableContentCreator('Today', 'color1');
+    variableContentCreator('Someday', 'color6');
+    variableContentCreator('This_year', 'color5');
+    variableContentCreator('This_month', 'color4');
+    variableContentCreator('This_week', 'color3');
     variableContentCreator('Tomorrow', 'color2');
-    variableContentCreator('Someday', 'color3');
+    variableContentCreator('Today', 'color1');
 
     const addPage = document.createElement('button');
     addPage.classList.add('addPage');
     addPage.textContent = '+';
 
     const variableContent = document.querySelector('.variableContent');
-    variableContent.appendChild(addPage);
-
+    variableContent.prepend(addPage);
+    let sameNameCount = 0;
     addPage.addEventListener('click', () => {
+        document.body.addEventListener('click', (event) => {
+            if (!['text', 'submit', 'button'].includes(event.target.type)) {
+                form.remove();
+                variableContent.prepend(addPage);
+                return
+            }
+        })
         const form = document.createElement('form');
-        form.classList.add('addPageForm');
         const inputName = document.createElement('input');
+        inputName.autofocus = true;
+
+        form.scrollIntoView({
+            behavior: 'smooth',
+            inline: 'end'
+        });
+
         inputName.type = 'text';
-        inputName.maxLength = 9;
-        inputName.placeholder = 'List title';
+        inputName.maxLength = 12;
+        inputName.placeholder = 'do:';
         inputName.classList.add('addPageInput');
         form.appendChild(inputName);
 
@@ -29,19 +45,23 @@ export const initializer = () => {
             button.style.backgroundColor = `var(--${color})`;
             button.classList.add('color-button');
             form.appendChild(button);
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (event) => {
                 let name = inputName.value.trim().replace(/[^\w\s]/gi, '').replace(/\s/g, '_');
                 if (name === '') {
                     name = 'Untitled'
                 }
-                console.log(name)
+
+                if (document.querySelector(`.${name}`)) {
+                    sameNameCount++
+                    name = name + sameNameCount;
+                }
                 const color = event.target.id;
                 variableContentCreator(name, color);
                 form.remove();
-                variableContent.append(addPage);
+                variableContent.prepend(addPage);
             });
             addPage.remove();
         });
-        variableContent.appendChild(form);
+        variableContent.prepend(form);
     });
 }

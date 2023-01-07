@@ -61,14 +61,15 @@ a {
     background-image: none;
     width: 100vw;
     margin-top: 7vh;
-    height: 2vh;
+    margin-bottom: 1vh;
+    height: 1vh;
     color: rgba(255, 255, 255, 0.342);
     border-bottom: solid rgba(0, 0, 0, 0.251) 1px;
 }
 
 .doAndTitle {
     display: flex;
-    font-size: 6.5vh;
+    font-size: min(10vw, 6vh);
 }
 
 .doColor {
@@ -229,4 +230,8 @@ li {
     transform: translate(-100vw);
     transition: all 1s ease;
     color: var(--color2)
+}
+
+#inputError {
+    color: red;
 }

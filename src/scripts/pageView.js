@@ -13,11 +13,6 @@ export const pageView = (variableContent, indicatorHolder, page) => {
     document.body.append(pageView);
     document.body.style.all = 'unset'
 
-    pageView.addEventListener('dblclick', (event) => {
-        console.log(event.target)
-        event.target.parentElement.parentElement.remove();
-    })
-
     page.addEventListener('click', (event) => {
         let pageToView = document.querySelector(`.${event.target.textContent}`);
         if (pageToView === null) return;
@@ -27,7 +22,6 @@ export const pageView = (variableContent, indicatorHolder, page) => {
         document.body.append(variableContent)
         indicatorHolder.style.display = 'flex';
         header.style.position = 'fixed';
-        console.log(pageToView)
         pageToView.scrollIntoView({
             behavior: 'smooth'
         });
