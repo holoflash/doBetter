@@ -5,27 +5,21 @@ export const initializer = () => {
     pageView.classList.add('pageView');
     document.body.append(pageView);
 
-    variableContentCreator('Someday', 'color6');
-    variableContentCreator('This year', 'color5');
-    variableContentCreator('This month', 'color4');
-    variableContentCreator('This week', 'color3');
-    variableContentCreator('Tomorrow', 'color2');
-    variableContentCreator('Today', 'color1');
-
     const addPage = document.createElement('button');
     addPage.classList.add('addPage');
     addPage.textContent = '+';
 
     const variableContent = document.querySelector('.variableContent');
-    variableContent.prepend(addPage);
+    variableContent.insertAdjacentElement('beforebegin', addPage);
     let sameNameCount = 0;
+
     addPage.addEventListener('click', () => {
         const page = document.querySelectorAll('.page');
         page.forEach(pages => pages.classList.add('dontTouch'));
         document.body.addEventListener('click', (event) => {
             if (event.target.className === 'listTitle') {
                 form.remove();
-                variableContent.prepend(addPage);
+                variableContent.insertAdjacentElement('beforebegin', addPage);
                 return
             }
             if (!['text', 'submit', 'button'].includes(event.target.type)) {
@@ -46,7 +40,6 @@ export const initializer = () => {
         inputName.maxLength = 12;
         inputName.placeholder = 'do:';
         inputName.classList.add('addPageInput');
-        inputName.autofocus = true;
         form.appendChild(inputName);
 
         ['color1', 'color2', 'color3', 'color4', 'color5', 'color6'].forEach(color => {
@@ -69,12 +62,10 @@ export const initializer = () => {
                 const color = event.target.id;
                 variableContentCreator(name, color);
                 form.remove();
-                addPage.remove();
-                variableContent.prepend(addPage);
-                page.forEach(pages => pages.classList.remove('dontTouch'));
+                variableContent.insertAdjacentElement('beforebegin', addPage);
             });
-            addPage.remove();
+            page.forEach(pages => pages.classList.remove('dontTouch'));
         });
-        variableContent.prepend(form);
+        variableContent.insertAdjacentElement('beforebegin', form);
     });
 }

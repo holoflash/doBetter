@@ -22,6 +22,7 @@ const createPlaceholder = () => {
 };
 
 export const taskManager = (taskList, addTask, completedTaskList, name, color) => {
+    console.log('hello there')
     const placeholder = createPlaceholder();
     const taskInput = createTaskInput();
     taskList.append(taskInput);
@@ -49,6 +50,9 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
         li.classList.add('task');
         li.textContent = taskName;
         taskList.append(li);
+
+        // const storedObject = JSON.parse(localStorage.getItem('Readme'));
+
         completion(taskList, completedTaskList, color, name);
         if (('ontouchstart' in window) ||
             (navigator.maxTouchPoints > 0) ||
@@ -67,9 +71,3 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
     });
     taskInput.addEventListener('focusout', handleTaskInput);
 };
-
-// //LocalStorage ops
-// const storedObject = JSON.parse(localStorage.getItem(name));
-// storedObject.taskArray.push(li.textContent);
-// localStorage.setItem(name, JSON.stringify(storedObject));
-// //end

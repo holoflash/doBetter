@@ -219,7 +219,6 @@ li {
 }
 
 .glow {
-
     transition: all 0.5s ease;
     opacity: 1;
     display: inline-block;

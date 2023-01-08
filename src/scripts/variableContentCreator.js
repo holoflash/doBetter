@@ -2,6 +2,7 @@ import { taskManager } from "./taskManager";
 import { scrollAndNavigate } from "./scrollAndNavigate";
 import { pageView } from './pageView';
 import { completion } from "./completion";
+import { initializer } from "./initializer";
 
 export const variableContentCreator = (name, color) => {
     name = (name.trim().replace(/\s/g, '_'));
@@ -28,6 +29,7 @@ export const variableContentCreator = (name, color) => {
     doAndTitle.classList.add('doAndTitle');
     doColor.classList.add('doColor');
     title.classList.add('listTitle');
+    title.classList.add(name)
     addTask.classList.add('addTask');
     taskList.classList.add('taskList');
     progressBar.classList.add(name);
@@ -50,35 +52,20 @@ export const variableContentCreator = (name, color) => {
     indicatorHolder.prepend(pageIndicator);
 
     completion(taskList, completedTaskList, color, name);
-    pageView(variableContent, indicatorHolder, doAndTitle, page);
+
+    pageView(variableContent, indicatorHolder, page);
     scrollAndNavigate(page);
-
-    logo.addEventListener('click', () => {
-        const pageViewElement = document.querySelector('.pageView');
-        if (pageViewElement && pageViewElement.hasChildNodes()) {
-            return
-        } else {
-            const addPage = document.querySelector('.addPage');
-            addPage.style.display = 'block';
-            pageView(variableContent, indicatorHolder, page);
-        }
-    });
-
     addTask.addEventListener('click', () => {
         taskManager(taskList, addTask, completedTaskList, name, color);
     });
+
+    logo.addEventListener('click', () => {
+        const pageViewActive = document.querySelector('.pageView');
+        if (pageViewActive) {
+            return
+        } else {
+            pageView(variableContent, indicatorHolder, page, taskList, addTask, completedTaskList, name, color);
+            initializer();
+        }
+    });
 }
-
-// // LocalStorage ops
-// const taskArray = [].slice.call(taskList)
-// const completedTaskArray = [].slice.call(completedTaskList)
-
-// const pageArray = {
-//     taskArray,
-//     completedTaskArray
-// };
-// localStorage.setItem(name, JSON.stringify(pageArray));
-
-// storedObject = { taskArray, completedTaskArray }
-// localStorage.setItem(name, JSON.stringify(storedObject));
-// // End
