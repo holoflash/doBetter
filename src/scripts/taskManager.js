@@ -50,9 +50,6 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
         li.classList.add('task');
         li.textContent = taskName;
         taskList.append(li);
-
-        // const storedObject = JSON.parse(localStorage.getItem('Readme'));
-
         completion(taskList, completedTaskList, color, name);
         if (('ontouchstart' in window) ||
             (navigator.maxTouchPoints > 0) ||

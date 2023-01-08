@@ -5,6 +5,10 @@ export const initializer = () => {
     pageView.classList.add('pageView');
     document.body.append(pageView);
 
+    variableContentCreator('Today', 'color1')
+    variableContentCreator('Tomorrow', 'color2')
+    variableContentCreator('Someday', 'color3')
+
     const addPage = document.createElement('button');
     addPage.classList.add('addPage');
     addPage.textContent = '+';

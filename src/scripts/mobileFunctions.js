@@ -45,4 +45,3 @@ export const mobileFunctions = (li, addTask, taskList, completedTaskList, color,
         }
     }
 }
-
