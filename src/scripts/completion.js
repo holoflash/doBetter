@@ -21,7 +21,7 @@ export const completion = (taskList, completedTaskList, color, name) => {
     } else {
         percentage = (((numberOfCompletedTasks / (numberOfTasks + numberOfCompletedTasks)) * 100)).toFixed(0);
     }
-    //Display the percentage value on the progressbar
+    // //Display the percentage value on the progressbar
     // progressBar.textContent = `${percentage}%`
     progressBar.style.backgroundImage = `linear-gradient(to right, var(--${color}), ${percentage}%, var(--mainBg))`;
 }

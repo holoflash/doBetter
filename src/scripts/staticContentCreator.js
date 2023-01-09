@@ -7,9 +7,6 @@ export function staticContentCreator() {
     const variableContent = document.createElement('div');
     const better = document.createElement('span');
     const indicatorHolder = document.createElement('div');
-    const pageView = document.createElement('div');
-    pageView.classList.add('pageView');
-
 
     constantContent.classList.add('constantContent');
     header.classList.add('header');
@@ -27,5 +24,5 @@ export function staticContentCreator() {
     logo.append(better);
     header.append(github, indicatorHolder, logo);
     constantContent.append(header);
-    body.append(constantContent, pageView, variableContent);
+    body.append(constantContent, variableContent);
 };

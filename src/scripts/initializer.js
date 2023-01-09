@@ -5,9 +5,9 @@ export const initializer = () => {
     pageView.classList.add('pageView');
     document.body.append(pageView);
 
-    variableContentCreator('Today', 'color1')
-    variableContentCreator('Tomorrow', 'color2')
     variableContentCreator('Someday', 'color3')
+    variableContentCreator('Tomorrow', 'color2')
+    variableContentCreator('Today', 'color1')
 
     const addPage = document.createElement('button');
     addPage.classList.add('addPage');
@@ -40,6 +40,10 @@ export const initializer = () => {
             inline: 'end'
         });
 
+        if (form) {
+            addPage.style.display = 'none'
+        }
+
         inputName.type = 'text';
         inputName.maxLength = 12;
         inputName.placeholder = 'do:';
@@ -53,7 +57,6 @@ export const initializer = () => {
             button.style.backgroundColor = `var(--${color})`;
             button.classList.add('color-button');
             form.appendChild(button);
-
             button.addEventListener('click', (event) => {
                 let name = inputName.value.trim().replace(/[^\w\s]/gi, '').replace(/\s/g, '');
                 if (name === '') {
@@ -67,6 +70,7 @@ export const initializer = () => {
                 variableContentCreator(name, color);
                 form.remove();
                 variableContent.insertAdjacentElement('beforebegin', addPage);
+                addPage.style.display = 'flex'
             });
             page.forEach(pages => pages.classList.remove('dontTouch'));
         });

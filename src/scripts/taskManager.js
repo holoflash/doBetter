@@ -22,7 +22,6 @@ const createPlaceholder = () => {
 };
 
 export const taskManager = (taskList, addTask, completedTaskList, name, color) => {
-    console.log('hello there')
     const placeholder = createPlaceholder();
     const taskInput = createTaskInput();
     taskList.append(taskInput);
@@ -41,6 +40,20 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
     };
 
     const handleTaskInput = () => {
+
+
+
+
+
+        // /////!!!!!!!
+        // const pageObject = JSON.parse(localStorage.getItem(name));
+        // pageObject.taskList.forEach(element => {
+        //     console.log(element)
+        // });
+
+
+
+
         const taskName = taskInput.textContent.trim();
         if (!taskName) {
             restore();
@@ -50,6 +63,18 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
         li.classList.add('task');
         li.textContent = taskName;
         taskList.append(li);
+
+
+
+
+        // /////!!!!!!!
+        // pageObject.taskList.push(li.textContent);
+        // localStorage.setItem(name, JSON.stringify(pageObject));
+
+
+
+
+
         completion(taskList, completedTaskList, color, name);
         if (('ontouchstart' in window) ||
             (navigator.maxTouchPoints > 0) ||

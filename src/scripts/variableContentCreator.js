@@ -2,7 +2,6 @@ import { taskManager } from "./taskManager";
 import { scrollAndNavigate } from "./scrollAndNavigate";
 import { pageView } from './pageView';
 import { completion } from "./completion";
-import { initializer } from "./initializer";
 
 export const variableContentCreator = (name, color) => {
     name = (name.trim().replace(/\s/g, '_'));
@@ -53,19 +52,27 @@ export const variableContentCreator = (name, color) => {
 
     completion(taskList, completedTaskList, color, name);
 
-    pageView(variableContent, indicatorHolder, page);
+    pageView(variableContent, indicatorHolder);
     scrollAndNavigate(page);
     addTask.addEventListener('click', () => {
         taskManager(taskList, addTask, completedTaskList, name, color);
     });
 
     logo.addEventListener('click', () => {
-        const pageViewActive = document.querySelector('.pageView');
-        if (pageViewActive) {
+        if (variableContent.parentNode !== document.body) {
             return
-        } else {
-            pageView(variableContent, indicatorHolder, page, taskList, addTask, completedTaskList, name, color);
-            initializer();
         }
+        pageView(variableContent, indicatorHolder);
     });
+
+    // /////!!!!!!!
+    // if (localStorage.getItem("username") === null) {
+    //     const pageObject = {
+    //         name: name,
+    //         color: color,
+    //         taskList: [],
+    //         completedTaskList: []
+    //     };
+    //     localStorage.setItem(name, JSON.stringify(pageObject));
+    // }
 }
