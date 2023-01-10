@@ -17,10 +17,16 @@ export const initializer = () => {
     addPage.textContent = '+';
     document.body.append(pageView);
 
-    createPage('Readme', 'color1')
-    variableContentCreator('Readme', 'color1')
-    variableContent.insertAdjacentElement('beforebegin', addPage);
+    //Local Storage ops
+    function retrievePageData() {
+        let AllPages = JSON.parse(localStorage.getItem('AllPages')) || [];
+        AllPages.forEach((page) => {
+            variableContentCreator(page.name, page.color);
+        });
+    }
+    retrievePageData();
 
+    variableContent.insertAdjacentElement('beforebegin', addPage);
     logo.addEventListener('click', () => {
         let pageIndex = Array.from(variableContent.childNodes)
         if (variableContent.parentNode !== document.body && variableContent.childNodes.length > 0) {
@@ -34,6 +40,7 @@ export const initializer = () => {
                 indexItem.style.color = `${cssColor}`
                 indexItem.addEventListener('click', (event) => {
 
+                    //Local Storage ops
                     let AllPages = JSON.parse(localStorage.getItem('AllPages'));
                     let newAllPages = AllPages.filter((element) => element.name !== indexItem.textContent);
                     console.log(newAllPages)
