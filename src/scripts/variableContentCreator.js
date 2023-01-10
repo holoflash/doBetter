@@ -1,6 +1,6 @@
 import { taskManager } from "./taskManager";
 import { scrollAndNavigate } from "./scrollAndNavigate";
-import { pageView } from './pageView';
+import { pageViewFunctions } from './pageViewFunctions';
 import { completion } from "./completion";
 
 export const variableContentCreator = (name, color) => {
@@ -16,7 +16,7 @@ export const variableContentCreator = (name, color) => {
     const completedTaskList = document.createElement('div')
     const addTask = document.createElement('div');
     const progressBar = document.createElement('div');
-    const logo = document.querySelector('.logo')
+
     doColor.textContent = 'do';
     title.textContent = name.trim().replace(/_/g, ' ');
     addTask.textContent = '+';
@@ -52,18 +52,13 @@ export const variableContentCreator = (name, color) => {
 
     completion(taskList, completedTaskList, color, name);
 
-    pageView(variableContent, indicatorHolder);
+    pageViewFunctions(variableContent, indicatorHolder);
     scrollAndNavigate(page);
     addTask.addEventListener('click', () => {
         taskManager(taskList, addTask, completedTaskList, name, color);
     });
 
-    logo.addEventListener('click', () => {
-        if (variableContent.parentNode !== document.body) {
-            return
-        }
-        pageView(variableContent, indicatorHolder);
-    });
+
 
     // /////!!!!!!!
     // if (localStorage.getItem("username") === null) {

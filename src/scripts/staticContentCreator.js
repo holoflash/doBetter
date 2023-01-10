@@ -1,5 +1,4 @@
 export function staticContentCreator() {
-    const body = document.querySelector('body');
     const constantContent = document.createElement('div');
     const header = document.createElement('div');
     const github = document.createElement('a');
@@ -7,6 +6,9 @@ export function staticContentCreator() {
     const variableContent = document.createElement('div');
     const better = document.createElement('span');
     const indicatorHolder = document.createElement('div');
+    const pageMenu = document.createElement('div')
+    const pageMenuContent = document.createElement('div')
+    const pageMenuTitle = document.createElement('h3')
 
     constantContent.classList.add('constantContent');
     header.classList.add('header');
@@ -14,15 +16,22 @@ export function staticContentCreator() {
     logo.classList.add('logo');
     variableContent.classList.add('variableContent');
     indicatorHolder.classList.add('indicatorHolder')
+    pageMenu.classList.add('pageMenu')
+    pageMenuContent.classList.add('pageMenuContent')
+    pageMenuTitle.classList.add('pageMenuTitle')
 
     github.textContent = '/holoflash';
     logo.textContent = 'do';
     better.textContent = 'Better';
     better.style.color = 'moccasin';
     github.href = 'https://github.com/holoflash/doBetter#readme';
+    pageMenuTitle.textContent = 'click to remove:'
 
     logo.append(better);
     header.append(github, indicatorHolder, logo);
     constantContent.append(header);
-    body.append(constantContent, variableContent);
+    document.body.append(constantContent, variableContent);
+    pageMenuContent.append(pageMenuTitle)
+    pageMenu.append(pageMenuContent)
+    document.body.append(pageMenu)
 };

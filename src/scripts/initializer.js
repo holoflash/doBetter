@@ -1,20 +1,60 @@
 import { variableContentCreator } from "./variableContentCreator";
+import { pageViewFunctions } from './pageViewFunctions';
 
 export const initializer = () => {
+    const logo = document.querySelector('.logo')
+    const indicatorHolder = document.querySelector('.indicatorHolder');
+    const variableContent = document.querySelector('.variableContent');
     const pageView = document.createElement('div');
-    pageView.classList.add('pageView');
-    document.body.append(pageView);
+    const addPage = document.createElement('button');
 
+    pageView.classList.add('pageView');
+    addPage.classList.add('addPage');
+    addPage.textContent = '+';
+    document.body.append(pageView);
     variableContentCreator('Someday', 'color3')
     variableContentCreator('Tomorrow', 'color2')
     variableContentCreator('Today', 'color1')
-
-    const addPage = document.createElement('button');
-    addPage.classList.add('addPage');
-    addPage.textContent = '+';
-
-    const variableContent = document.querySelector('.variableContent');
     variableContent.insertAdjacentElement('beforebegin', addPage);
+
+
+    const pageMenu = document.querySelector('.pageMenu')
+    const pageMenuContent = document.querySelector('.pageMenuContent')
+    const pageMenuTitle = document.querySelector('.pageMenuTitle')
+
+    logo.addEventListener('click', () => {
+        let pageIndex = Array.from(variableContent.childNodes)
+        if (variableContent.parentNode !== document.body && variableContent.childNodes.length > 0) {
+            pageMenuTitle.textContent = 'Click to remove:'
+            for (let i = 0; i < pageIndex.length; i++) {
+                const indexItem = document.createElement('div');
+                indexItem.classList.add('indexItem')
+                indexItem.textContent = pageIndex[i].classList[1];
+                let cssColor = pageIndex[i].childNodes[0].style.backgroundImage.slice(26, 39)
+                pageMenuContent.append(indexItem)
+                indexItem.style.color = `${cssColor}`
+                indexItem.addEventListener('click', (event) => {
+                    event.target.remove()
+                    indicatorHolder.querySelector(`#${indexItem.textContent}`).remove();
+                    document.querySelector(`.${indexItem.textContent}`).remove();
+                    if (pageMenuContent.childNodes.length === 1) {
+                        pageMenuTitle.textContent = 'All done!'
+                    }
+                });
+            }
+            pageMenu.style.display = "block";
+            window.onclick = function (event) {
+                if (event.target == pageMenu) {
+                    pageMenu.style.display = "none";
+                    pageMenuContent.textContent = ''
+                    pageMenuContent.append(pageMenuTitle)
+                }
+            }
+            return
+        }
+        pageViewFunctions(variableContent, indicatorHolder);
+    });
+
     let sameNameCount = 0;
 
     addPage.addEventListener('click', () => {

@@ -82,13 +82,58 @@ input {
 
 .color-button {
     all: unset;
-    width: 2.5vh;
+    width: 2.8vh;
     height: auto;
     aspect-ratio: 1/1;
-    margin: 0.5vw;
+    margin: 0.8vw;
     border-radius: 50%;
 }
 
 .color-button:hover {
     outline: solid moccasin 1px;
+}
+
+
+.pageMenu {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.498);
+}
+
+/* Modal Content/Box */
+.pageMenuContent {
+    background-color: var(--mainBg);
+    float: right;
+    margin: 1vh;
+    padding: 1vh;
+    outline: solid moccasin 1px;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    font-size: min(8vw, 6vh);
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.indexItem {
+    font-size: min(10vw, 6vh);
+}
+
+.indexItem:hover {
+    text-decoration: line-through;
+}
+
+.pageMenuTitle {
+    all: unset;
+    font-size: 2vh;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    margin-bottom: 1vh;
 }
