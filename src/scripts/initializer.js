@@ -1,5 +1,6 @@
 import { variableContentCreator } from "./variableContentCreator";
 import { pageViewFunctions } from './pageViewFunctions';
+import { createPage } from "./localStorage";
 
 export const initializer = () => {
     const logo = document.querySelector('.logo')
@@ -7,20 +8,18 @@ export const initializer = () => {
     const variableContent = document.querySelector('.variableContent');
     const pageView = document.createElement('div');
     const addPage = document.createElement('button');
+    const pageMenu = document.querySelector('.pageMenu')
+    const pageMenuContent = document.querySelector('.pageMenuContent')
+    const pageMenuTitle = document.querySelector('.pageMenuTitle')
 
     pageView.classList.add('pageView');
     addPage.classList.add('addPage');
     addPage.textContent = '+';
     document.body.append(pageView);
-    variableContentCreator('Someday', 'color3')
-    variableContentCreator('Tomorrow', 'color2')
-    variableContentCreator('Today', 'color1')
+
+    createPage('Readme', 'color1')
+    variableContentCreator('Readme', 'color1')
     variableContent.insertAdjacentElement('beforebegin', addPage);
-
-
-    const pageMenu = document.querySelector('.pageMenu')
-    const pageMenuContent = document.querySelector('.pageMenuContent')
-    const pageMenuTitle = document.querySelector('.pageMenuTitle')
 
     logo.addEventListener('click', () => {
         let pageIndex = Array.from(variableContent.childNodes)
@@ -29,21 +28,32 @@ export const initializer = () => {
             for (let i = 0; i < pageIndex.length; i++) {
                 const indexItem = document.createElement('div');
                 indexItem.classList.add('indexItem')
-                indexItem.textContent = pageIndex[i].classList[1];
+                indexItem.textContent = pageIndex[i].dataset.reference;
                 let cssColor = pageIndex[i].childNodes[0].style.backgroundImage.slice(26, 39)
                 pageMenuContent.append(indexItem)
                 indexItem.style.color = `${cssColor}`
                 indexItem.addEventListener('click', (event) => {
+
+                    let AllPages = JSON.parse(localStorage.getItem('AllPages'));
+                    let newAllPages = AllPages.filter((element) => element.name !== indexItem.textContent);
+                    console.log(newAllPages)
+                    localStorage.setItem('AllPages', JSON.stringify(newAllPages));
+
                     event.target.remove()
                     indicatorHolder.querySelector(`#${indexItem.textContent}`).remove();
                     document.querySelector(`.${indexItem.textContent}`).remove();
+
                     if (pageMenuContent.childNodes.length === 1) {
                         pageMenuTitle.textContent = 'All done!'
                     }
                 });
             }
+            variableContent.style.filter = `blur(10px)`
+            addPage.style.filter = `blur(10px)`
             pageMenu.style.display = "block";
             window.onclick = function (event) {
+                variableContent.style.filter = 'none';
+                addPage.style.filter = 'none'
                 if (event.target == pageMenu) {
                     pageMenu.style.display = "none";
                     pageMenuContent.textContent = ''
@@ -60,32 +70,17 @@ export const initializer = () => {
     addPage.addEventListener('click', () => {
         const page = document.querySelectorAll('.page');
         page.forEach(pages => pages.classList.add('dontTouch'));
-        document.body.addEventListener('click', (event) => {
-            if (event.target.className === 'listTitle') {
-                form.remove();
-                variableContent.insertAdjacentElement('beforebegin', addPage);
-                return
-            }
-            if (!['text', 'submit', 'button'].includes(event.target.type)) {
-                return
-            }
-        })
 
         const form = document.createElement('div');
-        form.classList.add('form')
         const inputName = document.createElement('input');
-
-        form.scrollIntoView({
-            behavior: 'smooth',
-            inline: 'end'
-        });
+        form.classList.add('form')
 
         if (form) {
             addPage.style.display = 'none'
         }
 
         inputName.type = 'text';
-        inputName.maxLength = 12;
+        inputName.maxLength = 20;
         inputName.placeholder = 'do:';
         inputName.classList.add('addPageInput');
         form.appendChild(inputName);
@@ -98,16 +93,25 @@ export const initializer = () => {
             button.classList.add('color-button');
             form.appendChild(button);
             button.addEventListener('click', (event) => {
-                let name = inputName.value.trim().replace(/[^\w\s]/gi, '').replace(/\s/g, '');
+                let name = inputName.value.trim();
                 if (name === '') {
                     name = 'Untitled';
                 }
-                if (document.querySelector(`.${name}`)) {
+                if (/^\d/.test(name)) {
+                    name = "_" + name;
+                }
+
+                if (document.querySelector(`.${name.replace(/[^\w\s]/gi, '').replace(/\s/g, '')}`)) {
                     sameNameCount++
                     name = name + sameNameCount;
                 }
                 const color = event.target.id;
+
+                //Local storage
+                createPage(name, color)
+                //DOM
                 variableContentCreator(name, color);
+
                 form.remove();
                 variableContent.insertAdjacentElement('beforebegin', addPage);
                 addPage.style.display = 'flex'
@@ -115,5 +119,11 @@ export const initializer = () => {
             page.forEach(pages => pages.classList.remove('dontTouch'));
         });
         variableContent.insertAdjacentElement('beforebegin', form);
-    });
+
+        form.addEventListener('dblclick', () => {
+            form.remove();
+            variableContent.insertAdjacentElement('beforebegin', addPage);
+            addPage.style.display = 'flex'
+        })
+    })
 }

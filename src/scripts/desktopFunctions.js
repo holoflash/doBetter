@@ -5,6 +5,17 @@ export const desktopFunctions = (li, addTask, taskList, completedTaskList, color
     let newPosition = null;
     let isDragging = false;
 
+    li.addEventListener('click', (event) => {
+        event.target.className = event.target.className === 'task' ? 'completedTask' : 'task';
+        if (event.target.parentNode === completedTaskList) {
+            taskList.insertBefore(event.target, addTask);
+            completion(taskList, completedTaskList, color, name);
+        } else {
+            completedTaskList.append(event.target);
+            completion(taskList, completedTaskList, color, name);
+        }
+    })
+
     li.addEventListener('mousedown', event => {
         originalPos = event.screenX;
         isDragging = true;

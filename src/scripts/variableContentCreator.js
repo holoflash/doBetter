@@ -4,7 +4,9 @@ import { pageViewFunctions } from './pageViewFunctions';
 import { completion } from "./completion";
 
 export const variableContentCreator = (name, color) => {
-    name = (name.trim().replace(/\s/g, '_'));
+    let fullName = (name.trim().replace(/\s/g, '_'));
+    let cleanName = name.replace(/[^\w\s]/gi, '').replace(/\s/g, '')
+
     const variableContent = document.querySelector('.variableContent');
     const pageIndicator = document.createElement('span')
     const indicatorHolder = document.querySelector('.indicatorHolder');
@@ -18,24 +20,26 @@ export const variableContentCreator = (name, color) => {
     const progressBar = document.createElement('div');
 
     doColor.textContent = 'do';
-    title.textContent = name.trim().replace(/_/g, ' ');
+    title.textContent = fullName.trim().replace(/_/g, ' ');
+
     addTask.textContent = '+';
     doColor.style.color = `var(--${color})`;
     pageIndicator.innerText = '❖'
 
     page.classList.add('page');
-    page.classList.add(name)
+    page.classList.add(cleanName);
+    page.dataset.reference = fullName.trim().replace(/_/g, ' ');
     doAndTitle.classList.add('doAndTitle');
     doColor.classList.add('doColor');
     title.classList.add('listTitle');
-    title.classList.add(name)
+    title.classList.add(cleanName);
     addTask.classList.add('addTask');
     taskList.classList.add('taskList');
-    progressBar.classList.add(name);
+    progressBar.classList.add(cleanName);
     progressBar.classList.add('progressBar')
     completedTaskList.classList.add('completedTaskList');
-    pageIndicator.classList.add('pageIndicator')
-    pageIndicator.id = name;
+    pageIndicator.classList.add('pageIndicator');
+    pageIndicator.id = cleanName;
     pageIndicator.style.color = `var(--${color})`;
 
     pageIndicator.addEventListener('click', (event) => {
@@ -50,24 +54,11 @@ export const variableContentCreator = (name, color) => {
     page.append(doAndTitle, taskList, completedTaskList);
     indicatorHolder.prepend(pageIndicator);
 
-    completion(taskList, completedTaskList, color, name);
+    completion(taskList, completedTaskList, color, cleanName);
 
     pageViewFunctions(variableContent, indicatorHolder);
     scrollAndNavigate(page);
     addTask.addEventListener('click', () => {
-        taskManager(taskList, addTask, completedTaskList, name, color);
+        taskManager(taskList, addTask, completedTaskList, cleanName, color);
     });
-
-
-
-    // /////!!!!!!!
-    // if (localStorage.getItem("username") === null) {
-    //     const pageObject = {
-    //         name: name,
-    //         color: color,
-    //         taskList: [],
-    //         completedTaskList: []
-    //     };
-    //     localStorage.setItem(name, JSON.stringify(pageObject));
-    // }
 }

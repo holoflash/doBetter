@@ -25,7 +25,6 @@ export function staticContentCreator() {
     better.textContent = 'Better';
     better.style.color = 'moccasin';
     github.href = 'https://github.com/holoflash/doBetter#readme';
-    pageMenuTitle.textContent = 'click to remove:'
 
     logo.append(better);
     header.append(github, indicatorHolder, logo);

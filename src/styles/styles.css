@@ -63,13 +63,14 @@ a {
     margin-top: 7vh;
     margin-bottom: 1vh;
     height: 1vh;
-    color: #1e222d00;
     border-bottom: solid rgba(0, 0, 0, 0.251) 1px;
+    border-top: solid rgba(0, 0, 0, 0.251) 1px;
 }
 
 .doAndTitle {
     display: flex;
-    font-size: min(10vw, 6vh);
+    font-size: min(8vw, 6vh);
+    max-width: 90vw;
 }
 
 .doColor {
@@ -116,6 +117,7 @@ a {
 }
 
 .taskList {
+    padding-top: 1vh;
     grid-column: 1 / 2;
     min-height: 4vh;
 }

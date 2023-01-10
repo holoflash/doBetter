@@ -18,15 +18,18 @@
 .pageView .page {
     outline: 1px solid moccasin;
     border-radius: 10px;
+    text-align: center;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     min-width: fit-content;
+    max-width: 100vw;
     height: fit-content;
+    min-height: 8vh;
     padding: 1vh;
     margin: 1vh;
     flex: 1;
 }
-
 
 .pageView .progressBar {
     background-image: none;
@@ -36,6 +39,12 @@
     height: 0.5vh;
     margin: 0.5vh;
     padding: 0;
+}
+
+.pageView .doAndTitle {
+    display: flex;
+    font-size: min(7vw, 5vh);
+    max-width: 90vw;
 }
 
 .pageView .taskList,
@@ -66,13 +75,14 @@
     align-items: center;
     flex-direction: row;
     border-radius: 5px;
-    width: 100vw;
+    width: 95vw;
+    padding: 1vh;
 }
 
 input {
     all: unset;
     background-color: rgba(0, 0, 0, 0.112);
-    width: 15ch;
+    max-width: 40%;
     height: 3vh;
     padding: 1vh;
     margin: 1vh;
@@ -93,7 +103,6 @@ input {
     outline: solid moccasin 1px;
 }
 
-
 .pageMenu {
     display: none;
     position: fixed;
@@ -106,34 +115,35 @@ input {
     background-color: rgba(0, 0, 0, 0.498);
 }
 
-/* Modal Content/Box */
 .pageMenuContent {
     background-color: var(--mainBg);
     float: right;
-    margin: 1vh;
+    margin-top: 1.5vh;
+    margin-right: 25%;
     padding: 1vh;
     outline: solid moccasin 1px;
     border-radius: 5px;
     width: fit-content;
     height: fit-content;
-    font-size: min(8vw, 6vh);
     display: flex;
     flex-direction: column;
-    text-align: right;
+    text-align: left;
+}
+
+.pageMenuTitle,
+.pageMenuDelete {
+    all: unset;
+    font-size: 1.5vh;
+    text-align: center;
 }
 
 .indexItem {
-    font-size: min(10vw, 6vh);
+    text-align: center;
+    text-decoration: none;
+    font-size: min(8vw, 5vh);
+    margin: 1vh;
 }
 
 .indexItem:hover {
     text-decoration: line-through;
-}
-
-.pageMenuTitle {
-    all: unset;
-    font-size: 2vh;
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    margin-bottom: 1vh;
 }
