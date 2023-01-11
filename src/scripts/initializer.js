@@ -90,22 +90,36 @@ export const initializer = () => {
     });
 
     let sameNameCount = 0;
+
     addPage.addEventListener('click', () => {
-        const page = document.querySelectorAll('.page');
-        page.forEach(pages => pages.classList.add('dontTouch'));
         const form = document.createElement('div');
         const inputName = document.createElement('input');
         form.classList.add('form')
+        const page = document.querySelectorAll('.page');
+        page.forEach(pages => pages.classList.add('dontTouch'));
 
         if (form) {
-            addPage.style.display = 'none'
+            addPage.style.display = 'none';
         }
+
+        setTimeout(() => inputName.focus(), 50);
 
         inputName.type = 'text';
         inputName.maxLength = 20;
         inputName.placeholder = 'do:';
         inputName.classList.add('addPageInput');
         form.appendChild(inputName);
+
+        inputName.addEventListener('blur', (event) => {
+            if (event.relatedTarget && event.relatedTarget.classList.contains("color-button")) {
+                return;
+            }
+            if (document.querySelector(".form")) {
+                form.remove();
+                variableContent.insertAdjacentElement('beforebegin', addPage);
+                addPage.style.display = 'flex';
+            }
+        });
 
         ['color1', 'color2', 'color3', 'color4', 'color5', 'color6'].forEach(color => {
             const button = document.createElement('button');
@@ -122,13 +136,11 @@ export const initializer = () => {
                 if (/^\d/.test(name)) {
                     name = "_" + name;
                 }
-
                 if (document.querySelector(`.${name.replace(/[^\w\s]/gi, '').replace(/\s/g, '')}`)) {
                     sameNameCount++;
                     name = name + sameNameCount;
                 }
                 const color = event.target.id;
-
                 createPage(name, color, [], []);
                 variableContentCreator(name, color);
                 form.remove();
@@ -138,11 +150,5 @@ export const initializer = () => {
             page.forEach(pages => pages.classList.remove('dontTouch'));
         });
         variableContent.insertAdjacentElement('beforebegin', form);
-
-        form.addEventListener('dblclick', () => {
-            form.remove();
-            variableContent.insertAdjacentElement('beforebegin', addPage);
-            addPage.style.display = 'flex'
-        })
     })
 }
