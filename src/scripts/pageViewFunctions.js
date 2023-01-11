@@ -2,11 +2,9 @@ import '../styles/pageView.css'
 
 export const pageViewFunctions = (variableContent, indicatorHolder) => {
     let pageViewActive = true;
-    const header = document.querySelector('.header')
     const pageView = document.querySelector('.pageView')
 
     pageView.style.display = 'flex'
-    header.style.position = 'relative';
     indicatorHolder.style.display = 'none'
 
     pageView.appendChild(variableContent)
@@ -19,7 +17,6 @@ export const pageViewFunctions = (variableContent, indicatorHolder) => {
             if (pageToView === null) return;
             document.body.append(variableContent);
             indicatorHolder.style.display = 'flex';
-            header.style.position = 'fixed';
             pageToView.scrollIntoView({
                 behavior: 'smooth'
             });

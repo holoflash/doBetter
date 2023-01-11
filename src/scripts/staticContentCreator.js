@@ -45,6 +45,8 @@ export function staticContentCreator() {
             if (reallyCertain === true) {
                 localStorage.clear();
                 location.reload();
+                let readmeDeleted = { readmeDeleted: false };
+                localStorage.setItem('readmeDeleted', JSON.stringify(readmeDeleted));
             }
             clickCounter = 0;
         }

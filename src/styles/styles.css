@@ -16,6 +16,10 @@
     touch-action: manipulation;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 html,
 body {
     width: 100vw;
@@ -25,11 +29,12 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;
+    box-sizing: content-box;
     background-color: var(--mainBg);
     font-family: Helvetica, sans-serif;
     font-size: 16px;
     color: aliceblue;
+    overflow: auto;
 }
 
 a {
@@ -41,11 +46,8 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100vw;
-    padding-bottom: 1vh;
     padding-top: 1vh;
-    position: absolute;
-    top: 0;
+    padding-bottom: 1vh;
     font-size: 3vh;
     background-color: rgba(0, 0, 0, 0.112);
 }
@@ -60,62 +62,44 @@ a {
     justify-content: center;
     background-image: none;
     width: 100vw;
-    margin-top: 7vh;
     margin-bottom: 1vh;
     height: 1vh;
-    border-bottom: solid rgba(0, 0, 0, 0.251) 1px;
-    border-top: solid rgba(0, 0, 0, 0.251) 1px;
 }
 
 .doAndTitle {
     display: flex;
     font-size: min(6.8vw, 5vh);
     max-width: 90vw;
-    align-self: center;
     color: white;
+    margin: 0;
+    padding: 0;
 }
 
 .doColor {
     color: var(--color1);
 }
 
-.constantContent {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-}
-
 .variableContent {
     align-items: center;
+    text-align: center;
     width: 100vw;
     display: grid;
     grid-template-rows: 1fr;
     grid-auto-flow: column;
-    overflow: scroll;
+    overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    height: 100%;
 }
 
 .page {
+    text-align: center;
     flex: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     scroll-snap-align: start;
-}
-
-.percentageDisplay {
-    font-size: 1.5vh;
-    margin: 0;
-    padding: 2vh;
-    align-self: center;
 }
 
 .taskList {
@@ -123,56 +107,63 @@ a {
     grid-column: 1 / 2;
     min-height: 4vh;
     color: white;
+    padding-bottom: 1vh;
+    font-size: min(2.5vh, 26px);
 }
 
 .completedTaskList {
-    grid-column: 2 / 3;
-    padding-bottom: 1vh;
+    border-top: solid moccasin 1px;
+    padding-top: 1vh;
     text-decoration: line-through;
     text-decoration-thickness: 1px;
     color: rgba(255, 228, 181, 0.385);
+    height: fit-content;
+    font-size: min(2.5vh, 20px);
 }
 
 .taskList,
 .completedTaskList {
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 100vw;
-    overflow: scroll;
+    width: 90%;
 }
 
 li {
     list-style: none;
     text-indent: 0;
     text-align: center;
-    padding: 0;
-    display: block;
-    font-size: min(3vh, 28px);
+    padding-block: 0.5vh;
     margin: 0.5vh;
+    display: block;
     word-wrap: break-word;
     width: fit-content;
     max-width: 90%;
 }
 
+
 .addTask {
     font-style: normal;
     text-align: center;
-    font-size: min(3vh, 35px);
+    font-size: min(2.5vh, 26px);
     color: moccasin;
     cursor: pointer;
+    padding-block: 0.5vh;
+    margin: 0.5vh;
 }
 
 .task-input {
     text-align: center;
     outline: none;
-    font-size: min(3vh, 35px);
+    font-size: min(2.5vh, 26px);
     width: 90%;
     word-wrap: break-word;
-    padding: 0;
+    padding-block: 0.5vh;
     margin: 0.5vh;
 }
+
 
 .placeholder {
     display: flex;
@@ -180,6 +171,7 @@ li {
     align-items: center;
     flex-direction: column;
 }
+
 
 .addToCompletedTaskListButton {
     all: unset;

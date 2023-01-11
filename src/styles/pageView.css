@@ -118,29 +118,29 @@ input {
 .pageMenuContent {
     background-color: var(--mainBg);
     float: right;
-    margin-top: 1.5vh;
-    margin-right: 25%;
-    padding: 1vh;
+    margin-top: 1.1vh;
+    margin-right: 1.1vh;
     outline: solid moccasin 1px;
     border-radius: 5px;
     width: fit-content;
     height: fit-content;
     display: flex;
     flex-direction: column;
-    text-align: left;
+    align-items: flex-end;
 }
 
 .pageMenuTitle,
 .pageMenuDelete {
     all: unset;
-    font-size: 1.5vh;
+    margin: 1vh;
+    font-size: min(4vw, 2vh);
     text-align: center;
 }
 
 .indexItem {
     text-align: center;
     text-decoration: none;
-    font-size: min(8vw, 5vh);
+    font-size: min(6vw, 4vh);
     margin: 1vh;
 }
 
