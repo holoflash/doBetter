@@ -46,7 +46,7 @@ a {
     padding-top: 1vh;
     position: absolute;
     top: 0;
-    font-size: 2.5vh;
+    font-size: 3vh;
     background-color: rgba(0, 0, 0, 0.112);
 }
 
@@ -69,8 +69,10 @@ a {
 
 .doAndTitle {
     display: flex;
-    font-size: min(8vw, 6vh);
+    font-size: min(6.8vw, 5vh);
     max-width: 90vw;
+    align-self: center;
+    color: white;
 }
 
 .doColor {
@@ -120,11 +122,15 @@ a {
     padding-top: 1vh;
     grid-column: 1 / 2;
     min-height: 4vh;
+    color: white;
 }
 
 .completedTaskList {
     grid-column: 2 / 3;
     padding-bottom: 1vh;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    color: rgba(255, 228, 181, 0.385);
 }
 
 .taskList,
@@ -143,18 +149,11 @@ li {
     text-align: center;
     padding: 0;
     display: block;
-    font-size: min(3vh, 35px);
+    font-size: min(3vh, 28px);
     margin: 0.5vh;
     word-wrap: break-word;
     width: fit-content;
     max-width: 90%;
-    color: white;
-}
-
-.completedTask {
-    text-decoration: line-through;
-    text-decoration-thickness: 1px;
-    color: rgba(255, 228, 181, 0.385);
 }
 
 .addTask {

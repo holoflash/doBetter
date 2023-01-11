@@ -1,6 +1,7 @@
 import { variableContentCreator } from "./variableContentCreator";
 import { pageViewFunctions } from './pageViewFunctions';
 import { createPage } from "./localStorage";
+import { storedTaskManager } from "./taskManager";
 
 export const initializer = () => {
     const logo = document.querySelector('.logo')
@@ -22,9 +23,12 @@ export const initializer = () => {
         let AllPages = JSON.parse(localStorage.getItem('AllPages')) || [];
         AllPages.forEach((page) => {
             variableContentCreator(page.name, page.color);
+            storedTaskManager(page.name, page.color, page.taskArray, page.completedTaskArray, page.completion)
         });
     }
+
     retrievePageData();
+
 
     variableContent.insertAdjacentElement('beforebegin', addPage);
     logo.addEventListener('click', () => {
@@ -40,15 +44,14 @@ export const initializer = () => {
                 indexItem.style.color = `${cssColor}`
                 indexItem.addEventListener('click', (event) => {
 
-                    //Local Storage ops
+                    // Local Storage ops
                     let AllPages = JSON.parse(localStorage.getItem('AllPages'));
-                    let newAllPages = AllPages.filter((element) => element.name !== indexItem.textContent);
-                    console.log(newAllPages)
+                    let newAllPages = AllPages.filter((element) => element.cleanName !== indexItem.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, ''));
                     localStorage.setItem('AllPages', JSON.stringify(newAllPages));
 
                     event.target.remove()
-                    indicatorHolder.querySelector(`#${indexItem.textContent}`).remove();
-                    document.querySelector(`.${indexItem.textContent}`).remove();
+                    indicatorHolder.querySelector(`#${indexItem.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, '')}`).remove();
+                    document.querySelector(`.${indexItem.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, '')}`).remove();
 
                     if (pageMenuContent.childNodes.length === 1) {
                         pageMenuTitle.textContent = 'All done!'
@@ -115,7 +118,7 @@ export const initializer = () => {
                 const color = event.target.id;
 
                 //Local storage
-                createPage(name, color)
+                createPage(name, color, [], [])
                 //DOM
                 variableContentCreator(name, color);
 

@@ -21,6 +21,16 @@ const createPlaceholder = () => {
     return placeholder;
 };
 
+const deviceCheckAndAdvise = (li, addTask, taskList, completedTaskList, color, name) => {
+    if (('ontouchstart' in window) ||
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0)) {
+        mobileFunctions(li, addTask, taskList, completedTaskList, color, name);
+    } else {
+        desktopFunctions(li, addTask, taskList, completedTaskList, color, name);
+    }
+}
+
 export const taskManager = (taskList, addTask, completedTaskList, name, color) => {
     const placeholder = createPlaceholder();
     const taskInput = createTaskInput();
@@ -40,20 +50,6 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
     };
 
     const handleTaskInput = () => {
-
-
-
-
-
-        // /////!!!!!!!
-        // const pageObject = JSON.parse(localStorage.getItem(name));
-        // pageObject.taskList.forEach(element => {
-        //     console.log(element)
-        // });
-
-
-
-
         const taskName = taskInput.textContent.trim();
         if (!taskName) {
             restore();
@@ -64,25 +60,13 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
         li.textContent = taskName;
         taskList.append(li);
 
-
-
-
-        // /////!!!!!!!
-        // pageObject.taskList.push(li.textContent);
-        // localStorage.setItem(name, JSON.stringify(pageObject));
-
-
-
-
+        let AllPages = JSON.parse(localStorage.getItem('AllPages')) || [];
+        let correspondingPage = AllPages.find(page => page.cleanName === name);
+        correspondingPage.taskArray.push(taskName);
+        localStorage.setItem('AllPages', JSON.stringify(AllPages));
 
         completion(taskList, completedTaskList, color, name);
-        if (('ontouchstart' in window) ||
-            (navigator.maxTouchPoints > 0) ||
-            (navigator.msMaxTouchPoints > 0)) {
-            mobileFunctions(li, addTask, taskList, completedTaskList, color, name);
-        } else {
-            desktopFunctions(li, addTask, taskList, completedTaskList, color, name);
-        }
+        deviceCheckAndAdvise(li, addTask, taskList, completedTaskList, color, name)
         restore();
     };
     taskInput.addEventListener('keydown', event => {
@@ -93,3 +77,28 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
     });
     taskInput.addEventListener('focusout', handleTaskInput);
 };
+
+
+export const storedTaskManager = (name, color, taskArray, completedTaskArray) => {
+    let taskList = document.querySelector(`[data-reference='${name}'] .taskList`);
+    let completedTaskList = document.querySelector(`[data-reference='${name}'] .completedTaskList`);
+    let addTask = document.querySelector(`[data-reference='${name}'] .addTask`);
+
+    taskArray.forEach(element => {
+        const li = document.createElement('li');
+        li.classList.add('task');
+        li.textContent = element;
+        taskList.append(li)
+        completion(taskList, completedTaskList, color, name);
+        deviceCheckAndAdvise(li, addTask, taskList, completedTaskList, color, name)
+    });
+
+    completedTaskArray.forEach(element => {
+        const li = document.createElement('li');
+        li.classList.add('completedTask');
+        li.textContent = element;
+        completedTaskList.append(li)
+        completion(taskList, completedTaskList, color, name);
+        deviceCheckAndAdvise(li, addTask, taskList, completedTaskList, color, name)
+    })
+}

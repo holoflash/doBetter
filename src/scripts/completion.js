@@ -1,5 +1,6 @@
 export const completion = (taskList, completedTaskList, color, name) => {
-    const progressBar = document.querySelector(`.${name}.progressBar`)
+    let cleanName = name.replace(/[^\w\s]/gi, '').replace(/\s/g, '');
+    const progressBar = document.querySelector(`.${cleanName}.progressBar`)
     let numberOfTasks = 0;
     let percentage = 0;
 

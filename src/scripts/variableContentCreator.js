@@ -53,9 +53,7 @@ export const variableContentCreator = (name, color) => {
     variableContent.prepend(page);
     page.append(doAndTitle, taskList, completedTaskList);
     indicatorHolder.prepend(pageIndicator);
-
     completion(taskList, completedTaskList, color, cleanName);
-
     pageViewFunctions(variableContent, indicatorHolder);
     scrollAndNavigate(page);
     addTask.addEventListener('click', () => {

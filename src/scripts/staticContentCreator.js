@@ -1,7 +1,7 @@
 export function staticContentCreator() {
     const constantContent = document.createElement('div');
     const header = document.createElement('div');
-    const github = document.createElement('a');
+    const holoflash = document.createElement('a');
     const logo = document.createElement('span');
     const variableContent = document.createElement('div');
     const better = document.createElement('span');
@@ -12,7 +12,7 @@ export function staticContentCreator() {
 
     constantContent.classList.add('constantContent');
     header.classList.add('header');
-    github.classList.add('github');
+    holoflash.classList.add('holoflash');
     logo.classList.add('logo');
     variableContent.classList.add('variableContent');
     indicatorHolder.classList.add('indicatorHolder')
@@ -20,14 +20,38 @@ export function staticContentCreator() {
     pageMenuContent.classList.add('pageMenuContent')
     pageMenuTitle.classList.add('pageMenuTitle')
 
-    github.textContent = '/holoflash';
+    holoflash.textContent = '/holoflash';
     logo.textContent = 'do';
     better.textContent = 'Better';
     better.style.color = 'moccasin';
-    github.href = 'https://github.com/holoflash/doBetter#readme';
+
+    //Multi-click fun!
+    let clickCounter = 0;
+    let timer = null;
+
+    holoflash.addEventListener('click', () => {
+        clickCounter++;
+        if (clickCounter === 1) {
+            timer = setTimeout(() => {
+                clickCounter = 0;
+            }, 5000);
+        } else if (clickCounter === 5) {
+            clearTimeout(timer);
+            let reallyCertain;
+            let certain = confirm('Reset all data?')
+            if (certain === true) {
+                reallyCertain = confirm("Are you sure? This action can't be undone");
+            }
+            if (reallyCertain === true) {
+                localStorage.clear();
+                location.reload();
+            }
+            clickCounter = 0;
+        }
+    });
 
     logo.append(better);
-    header.append(github, indicatorHolder, logo);
+    header.append(holoflash, indicatorHolder, logo);
     constantContent.append(header);
     document.body.append(constantContent, variableContent);
     pageMenuContent.append(pageMenuTitle)
