@@ -2,7 +2,7 @@
 
 Live: https://holoflash.github.io/doBetter/
 
-A responsive and multi device compatible to-do app built using only vanilla JavaScript,vanilla CSS, HTML and WebPack.
+A responsive and multi-device compatible to-do app built with vanilla JavaScript,vanilla CSS, HTML and WebPack.
 
 ## Notable features
 
