@@ -1,7 +1,6 @@
 import '../styles/pageView.css'
 
 export const pageViewFunctions = (variableContent, indicatorHolder) => {
-    let pageViewActive = true;
     const pageView = document.querySelector('.pageView')
 
     pageView.style.display = 'flex'
@@ -21,7 +20,6 @@ export const pageViewFunctions = (variableContent, indicatorHolder) => {
                 behavior: 'smooth'
             });
             pageView.style.display = 'none'
-            pageViewActive = false;
         }
         variableContent.removeEventListener('click', exitPageView);
     }

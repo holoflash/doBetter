@@ -21,10 +21,10 @@ export const initializer = () => {
     function retrievePageData() {
         let AllPages = JSON.parse(localStorage.getItem('AllPages')) || [];
         let readmeDeleted = JSON.parse(localStorage.getItem('readmeDeleted')) || {};
+        //An ugly fix to an issue with how the staticContent DOM elements are created
         if (readmeDeleted.readmeDeleted && !AllPages.length) {
             variableContentCreator('nEwPaGe103912341', 'color1');
             document.querySelector('.nEwPaGe103912341').remove();
-            return;
         } else {
             AllPages.forEach((page) => {
                 variableContentCreator(page.name, page.color);
@@ -40,18 +40,18 @@ export const initializer = () => {
         let pageIndex = Array.from(variableContent.childNodes)
         if (variableContent.parentNode !== document.body && variableContent.childNodes.length > 0) {
             pageMenuTitle.textContent = 'Click to remove:'
-            for (let i = 0; i < pageIndex.length; i++) {
-                const indexItem = document.createElement('div');
-                indexItem.classList.add('indexItem');
-                indexItem.textContent = pageIndex[i].dataset.reference;
-                let cssColor = pageIndex[i].childNodes[0].style.backgroundImage.slice(26, 39);
-                pageMenuContent.append(indexItem);
-                indexItem.style.color = `${cssColor}`
-                indexItem.addEventListener('click', (event) => {
+            for (const indexItem of pageIndex) {
+                const indexElement = document.createElement('div');
+                indexElement.classList.add('indexItem');
+                indexElement.textContent = indexItem.dataset.reference;
+                let cssColor = indexItem.childNodes[0].style.backgroundImage.slice(26, 39);
+                pageMenuContent.append(indexElement);
+                indexElement.style.color = `${cssColor}`
+                indexElement.addEventListener('click', (event) => {
                     let AllPages = JSON.parse(localStorage.getItem('AllPages'));
                     let readmePages = ['Readme: tasks', 'Readme: pages', 'Readme: misc'];
                     let readmePagesInLocalStorage = readmePages.filter(pageName => AllPages.some(page => page.name === pageName));
-                    AllPages = AllPages.filter((element) => element.cleanName !== indexItem.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, ''));
+                    AllPages = AllPages.filter((element) => element.cleanName !== indexElement.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, ''));
 
                     if (readmePagesInLocalStorage.length === 1) {
                         let readmeDeleted = { readmeDeleted: true };
@@ -60,8 +60,8 @@ export const initializer = () => {
 
                     localStorage.setItem('AllPages', JSON.stringify(AllPages));
                     event.target.remove();
-                    indicatorHolder.querySelector(`#${indexItem.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, '')}`).remove();
-                    document.querySelector(`.${indexItem.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, '')}`).remove();
+                    indicatorHolder.querySelector(`#${indexElement.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, '')}`).remove();
+                    document.querySelector(`.${indexElement.textContent.replace(/[^\w\s]/gi, '').replace(/\s/g, '')}`).remove();
 
                     if (pageMenuContent.childNodes.length === 1) {
                         variableContent.style.filter = 'none';
@@ -72,6 +72,7 @@ export const initializer = () => {
                     }
                 });
             }
+
             variableContent.style.filter = `blur(5px)`;
             addPage.style.filter = `blur(5px)`;
             pageMenu.style.display = "block";

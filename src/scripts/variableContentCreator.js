@@ -57,6 +57,6 @@ export const variableContentCreator = (name, color) => {
     pageViewFunctions(variableContent, indicatorHolder);
     scrollAndNavigate(page);
     addTask.addEventListener('click', () => {
-        taskManager(taskList, addTask, completedTaskList, cleanName, color);
+        taskManager(taskList, addTask, completedTaskList, name, color);
     });
 }

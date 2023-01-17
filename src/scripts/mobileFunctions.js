@@ -5,21 +5,21 @@ export const mobileFunctions = (li, addTask, taskList, completedTaskList, color,
     let originalPos = null;
     let newPosition = null;
     let isDragging = false;
+    let AllPages = JSON.parse(localStorage.getItem('AllPages')) || [];
 
-    const unmarkAsComplete = () => {
+    const unmarkAsComplete = (event) => {
         completedTaskList.append(event.target);
         completion(taskList, completedTaskList, color, name);
-        let AllPages = JSON.parse(localStorage.getItem('AllPages')) || [];
         let correspondingPage = AllPages.find(page => page.name === name);
         correspondingPage.taskArray.splice(correspondingPage.taskArray.indexOf(event.target.textContent), 1);
         correspondingPage.completedTaskArray.push(event.target.textContent);
         localStorage.setItem('AllPages', JSON.stringify(AllPages));
         completion(taskList, completedTaskList, color, name);
     }
-    const markAsComplete = () => {
+
+    const markAsComplete = (event) => {
         taskList.insertBefore(event.target, addTask);
         completion(taskList, completedTaskList, color, name);
-        let AllPages = JSON.parse(localStorage.getItem('AllPages')) || [];
         let correspondingPage = AllPages.find(page => page.name === name);
         correspondingPage.completedTaskArray.splice(correspondingPage.completedTaskArray.indexOf(event.target.textContent), 1);
         correspondingPage.taskArray.push(event.target.textContent);
@@ -30,16 +30,15 @@ export const mobileFunctions = (li, addTask, taskList, completedTaskList, color,
     li.addEventListener('click', (event) => {
         event.target.className = event.target.className === 'task' ? 'completedTask' : 'task';
         if (event.target.parentNode === completedTaskList) {
-            markAsComplete();
+            markAsComplete(event);
         } else {
-            unmarkAsComplete();
+            unmarkAsComplete(event);
         }
     })
 
     li.addEventListener('touchstart', event => {
         if (event.target === li) {
             variableContent.style.overflow = 'hidden'
-            console.log(event.target)
         }
         originalPos = event.touches[0].screenX;
         isDragging = true;

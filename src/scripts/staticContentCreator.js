@@ -1,7 +1,7 @@
 export function staticContentCreator() {
     const constantContent = document.createElement('div');
     const header = document.createElement('div');
-    const holoflash = document.createElement('a');
+    const holoflash = document.createElement('div');
     const logo = document.createElement('span');
     const variableContent = document.createElement('div');
     const better = document.createElement('span');

@@ -6,7 +6,7 @@ const createTaskInput = () => {
     const taskInput = document.createElement('div');
     taskInput.addEventListener('input', event => {
         if (event.inputType === 'insertFromPaste') {
-            taskInput.innerText = taskInput.innerText;
+            taskInput.innerText = taskInput.textContent;
         }
     });
     taskInput.contentEditable = true;
@@ -61,10 +61,9 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
         taskList.append(li);
 
         let AllPages = JSON.parse(localStorage.getItem('AllPages')) || [];
-        let correspondingPage = AllPages.find(page => page.cleanName === name);
+        let correspondingPage = AllPages.find(page => page.name === name);
         correspondingPage.taskArray.push(taskName);
         localStorage.setItem('AllPages', JSON.stringify(AllPages));
-
         completion(taskList, completedTaskList, color, name);
         deviceCheckAndAdvise(li, addTask, taskList, completedTaskList, color, name)
         restore();
@@ -77,7 +76,6 @@ export const taskManager = (taskList, addTask, completedTaskList, name, color) =
     });
     taskInput.addEventListener('focusout', handleTaskInput);
 };
-
 
 export const storedTaskManager = (name, color, taskArray, completedTaskArray) => {
     let taskList = document.querySelector(`[data-reference='${name}'] .taskList`);

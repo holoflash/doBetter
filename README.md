@@ -27,3 +27,11 @@ A responsive and multi device compatible to-do app built using only vanilla Java
 <img
   src="src/images/Screenshot 2023-01-11 at 18.20.19.png"
   alt="1">
+
+## Google Lighthouse
+
+Maximum score in all categories and all PWA requirements fulfilled.
+
+<img
+  src="src/images/lighthouse.png"
+  alt="lighthouse">

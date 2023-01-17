@@ -5,3 +5,5 @@ import { initializer } from "./initializer";
 
 staticContentCreator();
 initializer();
+
+navigator.serviceWorker.register('service-worker.js');
