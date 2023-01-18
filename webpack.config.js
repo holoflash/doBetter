@@ -1,15 +1,17 @@
-import { resolve } from 'path';
+const path = require('path');
 
-export const entry = './src/scripts/index.js';
-export const output = {
-    filename: 'bundle.js',
-    path: resolve(__dirname, 'dist'),
-};
-export const module = {
-    rules: [
-        {
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
-        },
-    ],
+module.exports = {
+    entry: './src/scripts/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+        ],
+    },
 };
